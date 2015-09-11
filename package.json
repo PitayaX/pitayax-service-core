@@ -3,7 +3,10 @@
   "description": "The core runtime for pitayax-service",
   "homepage": "http://www.pitayax.net",
   "version": "1.0.0",
-  "author": "Bruce Jiang <bruce2005@pitayax.net>",
+  "author": {
+    "name": "Bruce Jiang",
+    "email": "bruce2005@pitayax.net"
+  },
   "keywords": [
     "pitayax",
     "service",
@@ -15,7 +18,8 @@
   },
   "dependencies": {
     "babel": "^5.8.23",
-    "babel-runtime": "^5.8.20"
+    "babel-runtime": "^5.8.20",
+    "js-yaml": "^3.4.2"
   },
   "directories": {
     "lib": "./lib"
@@ -35,9 +39,5 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/PitayaX/pitayax-service-core.git"
-  },
-  "author": {
-   "name": "Bruce Jiang",
-   "email": "bruce2005@pitayax.net"
-   }
+  }
 }

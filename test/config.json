@@ -1,5 +1,5 @@
 {
-    "@@version":"1.0.1",
+    "$$version":"1.0.1",
     "name": "rest server",
     "databases": {
         "dbblog": "mongodb://10.10.73.209:27017/PSPMS_Restore",
