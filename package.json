@@ -1,0 +1,45 @@
+{
+  "name": "pitayax-service-core",
+  "description": "The core runtime for pitayax-service",
+  "homepage": "http://www.pitayax.net",
+  "version": "1.0.0",
+  "author": "Bruce Jiang <bruce2005@pitayax.net>",
+  "keywords": [
+    "pitayax",
+    "service",
+    "runtime"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "dependencies": {
+    "babel": "^5.8.23",
+    "babel-runtime": "^5.8.20"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "devDependencies": {
+    "urun": "~0.0.6",
+    "utest": "0.0.3",
+    "babel-eslint": "^4.1.0",
+    "eslint": "^1.2.1",
+    "eslint-plugin-react": "^3.3.0"
+  },
+  "scripts": {
+    "test": "node ./test/start"
+  },
+  "bugs": {
+    "url": "https://github.com/PitayaX/pitayax-service-core/issues/new",
+    "email": "bruce2005@pitayax.net"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PitayaX/pitayax-service-core.git"
+  },
+  "author": {
+   "name": "Bruce Jiang",
+   "email": "bruce2005@pitayax.net"
+ }
+}
