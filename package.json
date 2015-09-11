@@ -21,8 +21,6 @@
     "lib": "./lib"
   },
   "devDependencies": {
-    "urun": "~0.0.6",
-    "utest": "0.0.3",
     "babel-eslint": "^4.1.0",
     "eslint": "^1.2.1",
     "eslint-plugin-react": "^3.3.0"
@@ -41,5 +39,5 @@
   "author": {
    "name": "Bruce Jiang",
    "email": "bruce2005@pitayax.net"
- }
+   }
 }

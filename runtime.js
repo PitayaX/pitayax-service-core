@@ -2,7 +2,7 @@
 
 global.harmonyMode = (process.execArgv.indexOf('--harmony') >= 0) ? true :false
 
-console.log(((harmonyMode)?'harmony':'babel') + ' mode');
+//console.log(((harmonyMode)?'harmony':'babel') + ' mode');
 
 global.IIf = (express, r1, r2) => {
     return (express) ? r1 : r2;
@@ -12,8 +12,9 @@ module.exports = function(script){
 
     if (script){
         if (harmonyMode){
-            require('child_process').fork(script);
             module.exports = global;
+
+            require('child_process').fork(script);
         }
         else {
             require('babel/register');

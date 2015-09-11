@@ -13,10 +13,10 @@ let fs = require('fs');
 let m1 = new Map();
 m1.set('tt', 1).set('tt2', 3);
 
-
 let cf = new ConfigMap();
 cf.set('tt', 1).set('t2', 33);
 console.log(cf.toJSON());
+console.log('');
 
 //get full file path for configuration
 let configFile = path.join(__dirname, 'config.json');
@@ -25,3 +25,10 @@ let configFile = path.join(__dirname, 'config.json');
 let config = ConfigMap.parseJSON(fs.readFileSync(configFile, { encoding: 'utf-8' }));
 
 console.log ('json config:' + config.toJSON(true));
+
+let databases = config.get('databases');
+if (databases) {
+    for(let item of databases){
+        console.log(`key: ${item[0]}, cs:${item[1]}`);
+    }
+}
