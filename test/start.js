@@ -1,3 +1,5 @@
 'use strict';
 
-require('../runtime.js')(__dirname + '\\conf.js');
+require('../');
+//console.log('hm: ' + harmonyMode);
+require('child_process').fork('test/conf/conf.js');

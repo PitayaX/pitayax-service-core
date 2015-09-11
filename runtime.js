@@ -10,23 +10,22 @@ global.IIf = (express, r1, r2) => {
 
 module.exports = function(script){
 
-    if (script){
-        if (harmonyMode){
-            module.exports = global;
 
-            require('child_process').fork(script);
-        }
-        else {
-            require('babel/register');
+    if (harmonyMode){
+        module.exports = global;
 
-            //import es6 from 'babel-runtime/core-js';
-            var es6 = require('babel-runtime/core-js').default;
+        if (script) require('child_process').fork(script);
+    }
+    else {
+        require('babel/register');
 
-            //export default es6;
-            global.Map = es6.Map;
-            module.exports = es6;
+        //import es6 from 'babel-runtime/core-js';
+        var es6 = require('babel-runtime/core-js').default;
 
-            require(script);
-        }
+        //export default es6;
+        global.Map = es6.Map;
+        module.exports = es6;
+
+        if (script) require(script);
     }
 }
