@@ -28,6 +28,11 @@
   "directories": {
     "lib": "./lib"
   },
+  "files": [
+    "index.js",
+    "runtime.js",
+    "lib/"
+  ],
   "_npmVersion": "2.14.2",
   "_npmUser": {
       "name": "bruce1977",

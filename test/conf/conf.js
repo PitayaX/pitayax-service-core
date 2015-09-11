@@ -36,5 +36,5 @@ if (databases) {
 let configYamlFile = path.join(__dirname, 'config.yml');
 let configYaml = ConfigMap.parseYAML(fs.readFileSync(configYamlFile, { encoding: 'utf-8' }));
 
-console.log(configYaml.toJSON(false));
+console.log('Yaml config:' + configYaml.toJSON(false));
 console.log('port:' + configYaml.Settings['port']);
