@@ -1,9 +1,6 @@
 'use strict';
 
 let ConfigMap = require('../../').ConfigMap;
-//let ConfigMap = require('../lib/conf').ConfigMap;
-
-//console.log('d: ' + d);
 
 let path = require('path');
 let fs = require('fs');

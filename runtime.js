@@ -17,7 +17,10 @@ module.exports = function(script){
         if (script) require('child_process').fork(script);
     }
     else {
-        require('babel/register');
+        require('babel/register')({
+            //doesn't ignore pitayax modules
+            ignore: /node_modules\/[^pitayax]/
+        });
 
         //import es6 from 'babel-runtime/core-js';
         var es6 = require('babel-runtime/core-js').default;
