@@ -36,7 +36,7 @@ try{
     assert.equal(outputter.toString(), '4 - verbose message', 'verbose method');
     outputter.clear();
 
-    console.log('Tested the methods of error, warning, info and verbose');
+    console.log('Tested the methods of error, warning, info and verbose OK');
 
     logger.Level = 3;
 
@@ -50,14 +50,14 @@ try{
     assert.notEqual(outputter.toString(), '3 - debug message', 'debug method');
     outputter.clear();
 
-    console.log('Tested the method of debug');
+    console.log('Tested the method of debug OK');
 
     logger.Level = 3;
     logger.getMessageText = message => `[${message}]`;
     logger.info('message');
     assert.equal(outputter.toString(), '3 - [message]', 'overwrite getMessageText');
     outputter.clear();
-    console.log('Tested change message format.');
+    console.log('Tested change message format OK');
 
     let testEntries = [
         [logger.info, 'info message'],
@@ -98,7 +98,7 @@ try{
     entries = outputter.toArray();
     assert.equal(entries.length, 3, 'test engine 1');
     outputter.clear();
-    console.log('Tested level flag.');
+    console.log('Tested level flag OK');
 
     console.log('Class Logger tested OK!');
 }
