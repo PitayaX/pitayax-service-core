@@ -1,5 +1,7 @@
 'use strict';
 
+let assert = require('assert');
+
 let ConfigMap = require('../../').ConfigMap;
 
 let path = require('path');
@@ -7,31 +9,71 @@ let fs = require('fs');
 
 //console.log(ConfigMap.__proto__);
 
-let m1 = new Map();
-m1.set('tt', 1).set('tt2', 3);
+try{
+    let cf = new ConfigMap();
 
-let cf = new ConfigMap();
-cf.set('tt', 1).set('t2', 33);
-console.log(cf.toJSON());
-console.log('');
+    //test set key and get key
+    cf.set('key1', 1).set('key2', 'test string');
+    assert.equal(cf.get('key1'), 1, 'get key1');
+    assert.equal(cf.get('key2'), 'test string', 'get key2');
 
-//get full file path for configuration
-let configFile = path.join(__dirname, 'config.json');
+    assert.deepEqual(Array.from(cf.keys()), ['key1', 'key2'], 'get keys');
+    console.log('Tested get/set functions OK.');
 
-//parse config json to an object
-let config = ConfigMap.parseJSON(fs.readFileSync(configFile, { encoding: 'utf-8' }));
+    //test toJSON function
+    let cfJSON = `{
+    "key1": 1,
+    "key2": "test string"
+}`
+    assert.equal(cf.toJSON(), cfJSON, 'toJSON function');
+    console.log('Tested toJSON functions OK.');
 
-console.log ('json config:' + config.toJSON(true));
+    //test copy function
+    let cf2 = cf.clone();
+    assert.deepEqual(cf.toObject(), cf2.toObject(), 'clone function');
+    console.log('Tested clone functions OK.');
 
-let databases = config.get('databases');
-if (databases) {
-    for(let item of databases){
-        console.log(`key: ${item[0]}, cs:${item[1]}`);
+    let m1 = new Map(); m1.set('k1', 'v1').set('k2', 'v2');
+    let cf3 = new ConfigMap();
+    cf3.copy(m1);
+
+    assert.equal(cf3.get('k1'), 'v1', 'copied k1');
+    assert.equal(cf3.get('k2'), 'v2', 'copied k2');
+    console.log('Tested copy functions OK.');
+
+
+    //get full file path and parse it for JSON format
+    let configJSONFile = path.join(__dirname, 'config.json');
+    let configFromJSON = ConfigMap.parseJSON(fs.readFileSync(configJSONFile, { encoding: 'utf-8' }));
+    console.log('Parsed JSON file OK.')
+
+    //get full file path and parse it for YAML format
+    let configYamlFile = path.join(__dirname, 'config.yml');
+    let configFromYaml = ConfigMap.parseYAML(fs.readFileSync(configYamlFile, { encoding: 'utf-8' }));
+    console.log('Parsed YAML file OK.')
+
+    let configs = [configFromJSON, configFromYaml];
+
+    configs.forEach(function(config) {
+
+        assert.equal(config.get('name'), 'test file', 'get name from config')
+
+        let databases = config.get('databases');
+        if (!databases) throw new assert.AssertionError('get datatabase node');
+
+        assert.equal(databases.has('dbtest'), true, 'got dbtest node');
+        assert.equal(databases.has('dbsys'), true, 'got dbsys node');
+        assert.notEqual(databases.has('dbuser'), true, 'doesn\'t got dbuser node');
+    })
+    console.log('Checked configuration file!');
+
+    console.log('Class ConfigMap tested OK!');
+}
+catch(err) {
+    if (err instanceof assert.AssertionError){
+        console.log(`Tested ${err.message} failed`);
+    }
+    else{
+        console.log(`Unexcpeted error occur, details: ${err.message}.`);
     }
 }
-
-let configYamlFile = path.join(__dirname, 'config.yml');
-let configYaml = ConfigMap.parseYAML(fs.readFileSync(configYamlFile, { encoding: 'utf-8' }));
-
-console.log('Yaml config:' + configYaml.toJSON(false));
-console.log('port:' + configYaml.Settings['port']);

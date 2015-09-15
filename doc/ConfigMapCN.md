@@ -1,5 +1,5 @@
 ## ConfigMap
-The class ConfigMap can parse JSON or YAML format configuration file to a Map instance.
+ConfigMap类可以用于解析JSON或者YAML格式的配置文件成一个Map对象，并拥有一些属于它自己的功能函数。
 
 ``` javascript
 'use strict';
@@ -19,7 +19,7 @@ if (databases.has('dbtest')){
 
 ```
 
-> The content of config.yml
+> config.yml 内容如下
 
 ``` Yaml
 ---
