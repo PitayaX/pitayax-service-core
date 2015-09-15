@@ -10,6 +10,8 @@ let fs = require('fs');
 //console.log(ConfigMap.__proto__);
 
 try{
+    console.log('Start to test class ConfigMap.');
+
     let cf = new ConfigMap();
 
     //test set key and get key
@@ -33,7 +35,8 @@ try{
     assert.deepEqual(cf.toObject(), cf2.toObject(), 'clone function');
     console.log('Tested clone functions OK.');
 
-    let m1 = new Map(); m1.set('k1', 'v1').set('k2', 'v2');
+    let m1 = new ConfigMap();
+    m1.set('k1', 'v1').set('k2', 'v2');
     let cf3 = new ConfigMap();
     cf3.copy(m1);
 
