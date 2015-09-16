@@ -1,0 +1,7 @@
+---
+$$version:  "1.0.2"
+name:  debug file
+databases:
+    dbtest:  connection string for test with debug mode
+    dbsys:  connection string for system
+...

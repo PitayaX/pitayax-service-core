@@ -7,7 +7,7 @@ databases:
 
 settings:
     #env:  development
-    expression:  ${(()=> (2 + 3) * 5)()}
+    expression:  ${(function(){ return (2 + 3) * 5})()}
     port:  8088
     supportHttps:  false
     supportMiddleware:  true

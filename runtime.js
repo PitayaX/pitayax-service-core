@@ -1,22 +1,25 @@
 'use strict';
 
+if (process.argv.indexOf('--babel') >= 0){
+    global.babelMode = true;
+}
+else {
+    var version = (process.versions.node) ? process.versions.node.split('.'):[0, 0, 0];
+    global.babelMode = (parseInt(version[0]) >= 4) ? false : true;
+}
+
 global.harmonyMode = (process.execArgv.indexOf('--harmony') >= 0) ? true :false
 
-//console.log(((harmonyMode)?'harmony':'babel') + ' mode');
-
-global.IIf = (express, r1, r2) => {
+global.IIf = function(express, r1, r2) {
     return (express) ? r1 : r2;
 }
 
-module.exports = function(script){
+module.exports = function(){
 
+    if (global.babelMode) {
 
-    if (harmonyMode){
-        module.exports = global;
+        console.log('babel-mode');
 
-        if (script) require('child_process').fork(script);
-    }
-    else {
         require('babel/register')({
             //doesn't ignore pitayax modules
             ignore: /node_modules\/[^pitayax]/
@@ -28,7 +31,5 @@ module.exports = function(script){
         //export default es6;
         global.Map = es6.Map;
         module.exports = es6;
-
-        if (script) require(script);
     }
 }

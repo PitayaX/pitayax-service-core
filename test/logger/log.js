@@ -15,7 +15,7 @@ try{
     let logger = new Logger(outputter);
 
     //init properies for logger
-    logger.LineFormat = "`${level} - ${message}`"
+    logger.LineFormat = "$level - $message"
     logger.Level = 4;
     logger.getLevelText = level => level;
 

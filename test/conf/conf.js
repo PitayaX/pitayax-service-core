@@ -68,7 +68,17 @@ try{
         assert.equal(databases.has('dbsys'), true, 'got dbsys node');
         assert.notEqual(databases.has('dbuser'), true, 'doesn\'t got dbuser node');
     })
-    console.log('Checked configuration file!');
+    console.log('Checked configuration file OK');
+
+    let configDebugYamlFile = path.join(__dirname, 'config.debug.yml');
+    let configDebugFromYaml = ConfigMap.parseYAML(fs.readFileSync(configDebugYamlFile, { encoding: 'utf-8' }));
+
+    configFromYaml.merge(configDebugFromYaml);
+    assert.equal(configFromYaml.get('name'), 'debug file', 'get name from config')
+    assert.equal(configFromYaml.get('databases').get('dbtest'), 'connection string for test with debug mode', 'get databases.dbtest from config')
+
+    console.log('Checked merged function OK');
+
 
     console.log('Class ConfigMap tested OK!');
 }
