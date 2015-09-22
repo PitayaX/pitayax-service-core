@@ -23,6 +23,7 @@
   "dependencies": {
     "babel": "^5.8.23",
     "babel-runtime": "^5.8.20",
+    "co": "^4.0.0",
     "js-yaml": "^3.4.2"
   },
   "devDependencies": {
