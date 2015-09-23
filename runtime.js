@@ -14,13 +14,13 @@ global.IIf = function(express, r1, r2) {
     return (express) ? r1 : r2;
 }
 
-module.exports = function(){
+module.exports = function() {
 
     if (global.babelMode) {
 
         console.log('babel-mode');
 
-        require('babel/register')({
+        require('babel/register')( {
             //doesn't ignore pitayax modules
             ignore: /node_modules\/[^pitayax]/
         });
