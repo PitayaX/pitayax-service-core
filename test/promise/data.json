@@ -1,0 +1,749 @@
+/* 0 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3493"),
+    "ProductID" : 52,
+    "UnitsInStock" : 38,
+    "QuantityPerUnit" : "16 - 2 kg boxes",
+    "ReorderLevel" : 25,
+    "UnitPrice" : 7,
+    "SupplierID" : 24,
+    "Discontinued" : false,
+    "CategoryID" : 5,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Filo Mix"
+}
+
+/* 1 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3494"),
+    "ProductID" : 53,
+    "UnitsInStock" : 0,
+    "QuantityPerUnit" : "48 pieces",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 32.8,
+    "SupplierID" : 24,
+    "Discontinued" : true,
+    "CategoryID" : 6,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Perth Pasties"
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3495"),
+    "ProductID" : 54,
+    "UnitsInStock" : 21,
+    "QuantityPerUnit" : "16 pies",
+    "ReorderLevel" : 10,
+    "UnitPrice" : 7.45,
+    "SupplierID" : 25,
+    "Discontinued" : false,
+    "CategoryID" : 6,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Tourtière"
+}
+
+/* 3 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3496"),
+    "ProductID" : 55,
+    "UnitsInStock" : 115,
+    "QuantityPerUnit" : "24 boxes x 2 pies",
+    "ReorderLevel" : 20,
+    "UnitPrice" : 24,
+    "SupplierID" : 25,
+    "Discontinued" : false,
+    "CategoryID" : 6,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Pâté chinois"
+}
+
+/* 4 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3497"),
+    "ProductID" : 56,
+    "UnitsInStock" : 21,
+    "QuantityPerUnit" : "24 - 250 g pkgs.",
+    "ReorderLevel" : 30,
+    "UnitPrice" : 38,
+    "SupplierID" : 26,
+    "Discontinued" : false,
+    "CategoryID" : 5,
+    "UnitsOnOrder" : 10,
+    "ProductName" : "Gnocchi di nonna Alice"
+}
+
+/* 5 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3498"),
+    "ProductID" : 57,
+    "UnitsInStock" : 36,
+    "QuantityPerUnit" : "24 - 250 g pkgs.",
+    "ReorderLevel" : 20,
+    "UnitPrice" : 19.5,
+    "SupplierID" : 26,
+    "Discontinued" : false,
+    "CategoryID" : 5,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Ravioli Angelo"
+}
+
+/* 6 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3499"),
+    "ProductID" : 58,
+    "UnitsInStock" : 62,
+    "QuantityPerUnit" : "24 pieces",
+    "ReorderLevel" : 20,
+    "UnitPrice" : 13.25,
+    "SupplierID" : 27,
+    "Discontinued" : false,
+    "CategoryID" : 8,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Escargots de Bourgogne"
+}
+
+/* 7 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd349a"),
+    "ProductID" : 59,
+    "UnitsInStock" : 79,
+    "QuantityPerUnit" : "5 kg pkg.",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 55,
+    "SupplierID" : 28,
+    "Discontinued" : false,
+    "CategoryID" : 4,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Raclette Courdavault"
+}
+
+/* 8 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd349b"),
+    "ProductID" : 60,
+    "UnitsInStock" : 19,
+    "QuantityPerUnit" : "15 - 300 g rounds",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 34,
+    "SupplierID" : 28,
+    "Discontinued" : false,
+    "CategoryID" : 4,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Camembert Pierrot"
+}
+
+/* 9 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd349c"),
+    "ProductID" : 61,
+    "UnitsInStock" : 113,
+    "QuantityPerUnit" : "24 - 500 ml bottles",
+    "ReorderLevel" : 25,
+    "UnitPrice" : 28.5,
+    "SupplierID" : 29,
+    "Discontinued" : false,
+    "CategoryID" : 2,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Sirop d'érable"
+}
+
+/* 10 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd349d"),
+    "ProductID" : 62,
+    "UnitsInStock" : 17,
+    "QuantityPerUnit" : "48 pies",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 49.3,
+    "SupplierID" : 29,
+    "Discontinued" : false,
+    "CategoryID" : 3,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Tarte au sucre"
+}
+
+/* 11 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd349e"),
+    "ProductID" : 63,
+    "UnitsInStock" : 24,
+    "QuantityPerUnit" : "15 - 625 g jars",
+    "ReorderLevel" : 5,
+    "UnitPrice" : 43.9,
+    "SupplierID" : 7,
+    "Discontinued" : false,
+    "CategoryID" : 2,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Vegie-spread"
+}
+
+/* 12 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34a1"),
+    "ProductID" : 66,
+    "UnitsInStock" : 4,
+    "QuantityPerUnit" : "24 - 8 oz jars",
+    "ReorderLevel" : 20,
+    "UnitPrice" : 17,
+    "SupplierID" : 2,
+    "Discontinued" : false,
+    "CategoryID" : 2,
+    "UnitsOnOrder" : 100,
+    "ProductName" : "Louisiana Hot Spiced Okra"
+}
+
+/* 13 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34a2"),
+    "ProductID" : 67,
+    "UnitsInStock" : 52,
+    "QuantityPerUnit" : "24 - 12 oz bottles",
+    "ReorderLevel" : 10,
+    "UnitPrice" : 14,
+    "SupplierID" : 16,
+    "Discontinued" : false,
+    "CategoryID" : 1,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Laughing Lumberjack Lager"
+}
+
+/* 14 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34a3"),
+    "ProductID" : 68,
+    "UnitsInStock" : 6,
+    "QuantityPerUnit" : "10 boxes x 8 pieces",
+    "ReorderLevel" : 15,
+    "UnitPrice" : 12.5,
+    "SupplierID" : 8,
+    "Discontinued" : false,
+    "CategoryID" : 3,
+    "UnitsOnOrder" : 10,
+    "ProductName" : "Scottish Longbreads"
+}
+
+/* 15 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34a4"),
+    "ProductID" : 69,
+    "UnitsInStock" : 26,
+    "QuantityPerUnit" : "10 kg pkg.",
+    "ReorderLevel" : 15,
+    "UnitPrice" : 36,
+    "SupplierID" : 15,
+    "Discontinued" : false,
+    "CategoryID" : 4,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Gudbrandsdalsost"
+}
+
+/* 16 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34a5"),
+    "ProductID" : 70,
+    "UnitsInStock" : 15,
+    "QuantityPerUnit" : "24 - 355 ml bottles",
+    "ReorderLevel" : 30,
+    "UnitPrice" : 15,
+    "SupplierID" : 7,
+    "Discontinued" : false,
+    "CategoryID" : 1,
+    "UnitsOnOrder" : 10,
+    "ProductName" : "Outback Lager"
+}
+
+/* 17 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34a6"),
+    "ProductID" : 71,
+    "UnitsInStock" : 26,
+    "QuantityPerUnit" : "10 - 500 g pkgs.",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 21.5,
+    "SupplierID" : 15,
+    "Discontinued" : false,
+    "CategoryID" : 4,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Flotemysost"
+}
+
+/* 18 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34a7"),
+    "ProductID" : 72,
+    "UnitsInStock" : 14,
+    "QuantityPerUnit" : "24 - 200 g pkgs.",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 34.8,
+    "SupplierID" : 14,
+    "Discontinued" : false,
+    "CategoryID" : 4,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Mozzarella di Giovanni"
+}
+
+/* 19 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34a8"),
+    "ProductID" : 73,
+    "UnitsInStock" : 101,
+    "QuantityPerUnit" : "24 - 150 g jars",
+    "ReorderLevel" : 5,
+    "UnitPrice" : 15,
+    "SupplierID" : 17,
+    "Discontinued" : false,
+    "CategoryID" : 8,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Röd Kaviar"
+}
+
+/* 20 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34a9"),
+    "ProductID" : 74,
+    "UnitsInStock" : 4,
+    "QuantityPerUnit" : "5 kg pkg.",
+    "ReorderLevel" : 5,
+    "UnitPrice" : 10,
+    "SupplierID" : 4,
+    "Discontinued" : false,
+    "CategoryID" : 7,
+    "UnitsOnOrder" : 20,
+    "ProductName" : "Longlife Tofu"
+}
+
+/* 21 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34aa"),
+    "ProductID" : 75,
+    "UnitsInStock" : 125,
+    "QuantityPerUnit" : "24 - 0.5 l bottles",
+    "ReorderLevel" : 25,
+    "UnitPrice" : 7.75,
+    "SupplierID" : 12,
+    "Discontinued" : false,
+    "CategoryID" : 1,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Rhönbräu Klosterbier"
+}
+
+/* 22 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34ab"),
+    "ProductID" : 76,
+    "UnitsInStock" : 57,
+    "QuantityPerUnit" : "500 ml",
+    "ReorderLevel" : 20,
+    "UnitPrice" : 18,
+    "SupplierID" : 23,
+    "Discontinued" : false,
+    "CategoryID" : 1,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Lakkalikööri"
+}
+
+/* 23 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd34ac"),
+    "ProductID" : 77,
+    "UnitsInStock" : 32,
+    "QuantityPerUnit" : "12 boxes",
+    "ReorderLevel" : 15,
+    "UnitPrice" : 13,
+    "SupplierID" : 12,
+    "Discontinued" : false,
+    "CategoryID" : 2,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Original Frankfurter grüne Soße"
+}
+
+/* 24 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3460"),
+    "ProductID" : 1,
+    "UnitsInStock" : 39,
+    "QuantityPerUnit" : "10 boxes x 20 bags",
+    "ReorderLevel" : 10,
+    "UnitPrice" : 18,
+    "SupplierID" : 1,
+    "Discontinued" : false,
+    "CategoryID" : 1,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Chai"
+}
+
+/* 25 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3461"),
+    "ProductID" : 2,
+    "UnitsInStock" : 17,
+    "QuantityPerUnit" : "24 - 12 oz bottles",
+    "ReorderLevel" : 25,
+    "UnitPrice" : 19,
+    "SupplierID" : 1,
+    "Discontinued" : false,
+    "CategoryID" : 1,
+    "UnitsOnOrder" : 40,
+    "ProductName" : "Chang"
+}
+
+/* 26 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3462"),
+    "ProductID" : 3,
+    "UnitsInStock" : 13,
+    "QuantityPerUnit" : "12 - 550 ml bottles",
+    "ReorderLevel" : 25,
+    "UnitPrice" : 10,
+    "SupplierID" : 1,
+    "Discontinued" : false,
+    "CategoryID" : 2,
+    "UnitsOnOrder" : 70,
+    "ProductName" : "Aniseed Syrup"
+}
+
+/* 27 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3463"),
+    "ProductID" : 4,
+    "UnitsInStock" : 53,
+    "QuantityPerUnit" : "48 - 6 oz jars",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 22,
+    "SupplierID" : 2,
+    "Discontinued" : false,
+    "CategoryID" : 2,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Chef Anton's Cajun Seasoning"
+}
+
+/* 28 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3464"),
+    "ProductID" : 5,
+    "UnitsInStock" : 0,
+    "QuantityPerUnit" : "36 boxes",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 21.35,
+    "SupplierID" : 2,
+    "Discontinued" : true,
+    "CategoryID" : 2,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Chef Anton's Gumbo Mix"
+}
+
+/* 29 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3465"),
+    "ProductID" : 6,
+    "UnitsInStock" : 120,
+    "QuantityPerUnit" : "12 - 8 oz jars",
+    "ReorderLevel" : 25,
+    "UnitPrice" : 25,
+    "SupplierID" : 3,
+    "Discontinued" : false,
+    "CategoryID" : 2,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Grandma's Boysenberry Spread"
+}
+
+/* 30 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3466"),
+    "ProductID" : 7,
+    "UnitsInStock" : 15,
+    "QuantityPerUnit" : "12 - 1 lb pkgs.",
+    "ReorderLevel" : 10,
+    "UnitPrice" : 30,
+    "SupplierID" : 3,
+    "Discontinued" : false,
+    "CategoryID" : 7,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Uncle Bob's Organic Dried Pears"
+}
+
+/* 31 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3467"),
+    "ProductID" : 8,
+    "UnitsInStock" : 6,
+    "QuantityPerUnit" : "12 - 12 oz jars",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 40,
+    "SupplierID" : 3,
+    "Discontinued" : false,
+    "CategoryID" : 2,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Northwoods Cranberry Sauce"
+}
+
+/* 32 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3468"),
+    "ProductID" : 9,
+    "UnitsInStock" : 29,
+    "QuantityPerUnit" : "18 - 500 g pkgs.",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 97,
+    "SupplierID" : 4,
+    "Discontinued" : true,
+    "CategoryID" : 6,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Mishi Kobe Niku"
+}
+
+/* 33 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3469"),
+    "ProductID" : 10,
+    "UnitsInStock" : 31,
+    "QuantityPerUnit" : "12 - 200 ml jars",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 31,
+    "SupplierID" : 4,
+    "Discontinued" : false,
+    "CategoryID" : 8,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Ikura"
+}
+
+/* 34 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd346a"),
+    "ProductID" : 11,
+    "UnitsInStock" : 22,
+    "QuantityPerUnit" : "1 kg pkg.",
+    "ReorderLevel" : 30,
+    "UnitPrice" : 21,
+    "SupplierID" : 5,
+    "Discontinued" : false,
+    "CategoryID" : 4,
+    "UnitsOnOrder" : 30,
+    "ProductName" : "Queso Cabrales"
+}
+
+/* 35 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd346b"),
+    "ProductID" : 12,
+    "UnitsInStock" : 86,
+    "QuantityPerUnit" : "10 - 500 g pkgs.",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 38,
+    "SupplierID" : 5,
+    "Discontinued" : false,
+    "CategoryID" : 4,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Queso Manchego La Pastora"
+}
+
+/* 36 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd346c"),
+    "ProductID" : 13,
+    "UnitsInStock" : 24,
+    "QuantityPerUnit" : "2 kg box",
+    "ReorderLevel" : 5,
+    "UnitPrice" : 6,
+    "SupplierID" : 6,
+    "Discontinued" : false,
+    "CategoryID" : 8,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Konbu"
+}
+
+/* 37 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd346d"),
+    "ProductID" : 14,
+    "UnitsInStock" : 35,
+    "QuantityPerUnit" : "40 - 100 g pkgs.",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 23.25,
+    "SupplierID" : 6,
+    "Discontinued" : false,
+    "CategoryID" : 7,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Tofu"
+}
+
+/* 38 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd346e"),
+    "ProductID" : 15,
+    "UnitsInStock" : 39,
+    "QuantityPerUnit" : "24 - 250 ml bottles",
+    "ReorderLevel" : 5,
+    "UnitPrice" : 15.5,
+    "SupplierID" : 6,
+    "Discontinued" : false,
+    "CategoryID" : 2,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Genen Shouyu"
+}
+
+/* 39 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd346f"),
+    "ProductID" : 16,
+    "UnitsInStock" : 29,
+    "QuantityPerUnit" : "32 - 500 g boxes",
+    "ReorderLevel" : 10,
+    "UnitPrice" : 17.45,
+    "SupplierID" : 7,
+    "Discontinued" : false,
+    "CategoryID" : 3,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Pavlova"
+}
+
+/* 40 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3470"),
+    "ProductID" : 17,
+    "UnitsInStock" : 0,
+    "QuantityPerUnit" : "20 - 1 kg tins",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 39,
+    "SupplierID" : 7,
+    "Discontinued" : true,
+    "CategoryID" : 6,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Alice Mutton"
+}
+
+/* 41 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3471"),
+    "ProductID" : 18,
+    "UnitsInStock" : 42,
+    "QuantityPerUnit" : "16 kg pkg.",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 62.5,
+    "SupplierID" : 7,
+    "Discontinued" : false,
+    "CategoryID" : 8,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Carnarvon Tigers"
+}
+
+/* 42 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3472"),
+    "ProductID" : 19,
+    "UnitsInStock" : 25,
+    "QuantityPerUnit" : "10 boxes x 12 pieces",
+    "ReorderLevel" : 5,
+    "UnitPrice" : 9.199999999999999,
+    "SupplierID" : 8,
+    "Discontinued" : false,
+    "CategoryID" : 3,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Teatime Chocolate Biscuits"
+}
+
+/* 43 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3473"),
+    "ProductID" : 20,
+    "UnitsInStock" : 40,
+    "QuantityPerUnit" : "30 gift boxes",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 81,
+    "SupplierID" : 8,
+    "Discontinued" : false,
+    "CategoryID" : 3,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Sir Rodney's Marmalade"
+}
+
+/* 44 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3474"),
+    "ProductID" : 21,
+    "UnitsInStock" : 3,
+    "QuantityPerUnit" : "24 pkgs. x 4 pieces",
+    "ReorderLevel" : 5,
+    "UnitPrice" : 10,
+    "SupplierID" : 8,
+    "Discontinued" : false,
+    "CategoryID" : 3,
+    "UnitsOnOrder" : 40,
+    "ProductName" : "Sir Rodney's Scones"
+}
+
+/* 45 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3475"),
+    "ProductID" : 22,
+    "UnitsInStock" : 104,
+    "QuantityPerUnit" : "24 - 500 g pkgs.",
+    "ReorderLevel" : 25,
+    "UnitPrice" : 21,
+    "SupplierID" : 9,
+    "Discontinued" : false,
+    "CategoryID" : 5,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Gustaf's Knäckebröd"
+}
+
+/* 46 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3476"),
+    "ProductID" : 23,
+    "UnitsInStock" : 61,
+    "QuantityPerUnit" : "12 - 250 g pkgs.",
+    "ReorderLevel" : 25,
+    "UnitPrice" : 9,
+    "SupplierID" : 9,
+    "Discontinued" : false,
+    "CategoryID" : 5,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Tunnbröd"
+}
+
+/* 47 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3477"),
+    "ProductID" : 24,
+    "UnitsInStock" : 20,
+    "QuantityPerUnit" : "12 - 355 ml cans",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 4.5,
+    "SupplierID" : 10,
+    "Discontinued" : true,
+    "CategoryID" : 1,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Guaraná Fantástica"
+}
+
+/* 48 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3478"),
+    "ProductID" : 25,
+    "UnitsInStock" : 76,
+    "QuantityPerUnit" : "20 - 450 g glasses",
+    "ReorderLevel" : 30,
+    "UnitPrice" : 14,
+    "SupplierID" : 11,
+    "Discontinued" : false,
+    "CategoryID" : 3,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "NuNuCa Nuß-Nougat-Creme"
+}
+
+/* 49 */
+{
+    "_id" : ObjectId("55d440d988dba04ef8dd3479"),
+    "ProductID" : 26,
+    "UnitsInStock" : 15,
+    "QuantityPerUnit" : "100 - 250 g bags",
+    "ReorderLevel" : 0,
+    "UnitPrice" : 31.23,
+    "SupplierID" : 11,
+    "Discontinued" : false,
+    "CategoryID" : 3,
+    "UnitsOnOrder" : 0,
+    "ProductName" : "Gumbär Gummibärchen"
+}

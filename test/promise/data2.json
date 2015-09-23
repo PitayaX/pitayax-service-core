@@ -1,0 +1,17 @@
+{
+    "_id" : ObjectId("55fbb036f19aa4c866e80b52"),
+    "title" : "title",
+    "abstract" : "abstract",
+    "content" : "content",
+    "publishedOn" : ISODate("2015-09-17T16:00:00.000+0000"),
+    "publishedBy" : "Bruce",
+    "status" : NumberInt(1),
+    "viewCount" : NumberInt(0),
+    "CanComment" : false,
+    "tags" : [
+        "key1",
+        "key2",
+        "key3"
+    ],
+    "__v" : NumberInt(0)
+}
