@@ -16,29 +16,47 @@ var fn = aQ.wrap(function* (val) {
 });
 
 var fn2 = aQ.wrap(function* (val) {
-    //co.thunk
     return yield [Promise.resolve('t1'), Promise.resolve('t2'), Promise.resolve('t3')];
 });
 
 fn2('test')
-    .then(function(val){
-        console.log(val);
+    .then(function(val) {
+        console.log('fn2: ' + JSON.stringify(val));
     })
 
-aQ.invoke(fs.readFile, [dataFile2, 'utf-8'])
+let data1, data2;
+
+aQ.readFile(dataFile2, 'utf-8')
     .then(function(data){
-        console.log('read file');
-        console.log(data);
+        data1 = data;
     })
+
+aQ.oneByOne([
+                aQ.readFile(dataFile2, 'utf-8'),
+                aQ.apply(fs.readFile, [dataFile2, 'utf-8'])
+            ])
+    .then(function(result) {
+        console.log('length: ' + result.length);
+    });
+
+//console.log(data1);
+aQ.parallel([Promise.resolve('t1'), Promise.resolve('t2'), Promise.resolve('t3')])
+    .then(function(result) {
+        result.forEach(function(a){
+            //console.log(a);
+        })
+    })
+
 
 aQ.oneByOne([Promise.resolve('t1'), Promise.resolve('t2'), Promise.resolve('t3')])
     .then(function(result) {
         result.forEach(function(a){
-            console.log(a);
+            //console.log(a);
         })
     })
 
 aQ.rest('http://10.10.73.207:8088/api/post/list')
-    .then(function(data){
-        console.log(data);
+    .then(function(data) {
+        console.log('get rest data');
+        //console.log(data);
     })
