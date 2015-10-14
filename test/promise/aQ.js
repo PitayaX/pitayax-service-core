@@ -1,97 +1,71 @@
 'use strict';
 
+let assert = require('assert');
 let path = require('path');
 let fs = require('fs');
 let aQ = require('../../').aQ;
 
-let dataFile = path.join(__dirname, 'data.json');
-let dataFile2 = path.join(__dirname, 'data2.json');
+describe('aQ', function() {
+    it('wrap value', function(done) {
 
-var fn = aQ.wrap(function* (val) {
-    //co.thunk
-    let f1 = yield aQ.readFile(dataFile, 'utf-8');
-    let f2 = yield aQ.readFile(dataFile2, 'utf-8');
-
-    return [f1, f2];
-});
-
-var fn2 = aQ.wrap(function* (val) {
-    return yield [Promise.resolve('t1'), Promise.resolve('t2'), Promise.resolve('t3')];
-});
-
-/*
-fn2('test')
-    .then(function(val) {
-        console.log('fn2: ' + JSON.stringify(val));
-    })
-    */
-
-let data1, data2;
-
-aQ.readFile(dataFile2, 'utf-8')
-    .then(function(data){
-        data1 = data;
-    })
-
-/*
-aQ.oneByOne([
-                aQ.readFile(dataFile2, 'utf-8'),
-                aQ.apply(fs.readFile, [dataFile2, 'utf-8'])
-            ])
-    .then(function(result) {
-        console.log('length: ' + result.length);
+        aQ.Q(1)
+            .then(function(data) {
+                assert.equal(data, 1, 'test');
+                done();
+        })
     });
-    */
 
-    let f1 = function(flag, count) {
-        console.log('start ' + flag);
-        for(let i = 0; i < count; i++) {
-            console.log(flag + '2:' + i);
-        }
-        console.log('end ' + flag);
-    }
+    it ('wrap function', function(done) {
+        let dataFile = path.join(__dirname, 'test.dat');
 
-    let f2 = function(flag, count, callback) {
-        console.log('start ' + flag);
+        //read file from sync method
+        let syncData = fs.readFileSync(dataFile, 'utf-8')
 
-        try{
-            for(let i = 0; i < count; i++) {
-                console.log(flag + ':' + i);
+        //read file from async method
+        aQ.apply(fs.readFile, [dataFile, 'utf-8'])
+            .then(function(data) {
+                assert.equal(data, syncData, 'compare file content failed.');
+                done();
+        });
+    });
+
+    it('wrap functions', function() {
+
+        var fn = aQ.wrap(function* (val) {
+
+            assert.equal(val, 6, 'invaild val');
+
+            let r = [];
+            if (val >= 0) {
+                for(let i = 0; i < val; i++){
+
+                    let ri = yield aQ.Q(i + 1);
+                    r.push(ri);
+                }
             }
 
-            callback(null, count);
-        }
-        catch(err){
-            callback(err, null);
-        }
-    }
+            assert.deepEqual(r, [1, 2, 3, 4, 5, 6], 'Invaild length of return array.');
 
-//let queues1 = [aQ.invoke(f1, ['a', 20]), aQ.invoke(f1, ['b', 15]), aQ.invoke(f1, ['c', 10])];
-//let queues2 = [aQ.apply(f2, ['a', 20]), aQ.apply(f2, ['b', 15]), aQ.apply(f2, ['c', 10])];
-let queues3 = [
-                aQ.readFile(dataFile2, 'utf-8').then(function(data){console.log('aa1'); return Promise.resolve('t1');}),
-                aQ.readFile(dataFile, 'utf-8').then(function(data){console.log('bb2'); return Promise.resolve('tt2');}),
-                aQ.readFile(dataFile2, 'utf-8').then(function(data){console.log('cc3'); return Promise.resolve('ttt3')})
-            ];
-
-console.log('Ready for parallel test');
-aQ.oneByOne(queues3);
-
-/*
-    .then(function(data) {
-        console.log(data);
-
-        data.forEach(function(d) {
-            console.log(d.length);
+            return r;
         });
 
-        console.log('Finished test!');
+        return fn(6);
     });
-    */
 
+    it('parallel mode', function(done) {
 
+        let q1 = [aQ.Q(2), aQ.Q(4), aQ.Q(6)];
+        aQ.parallel(q1).then(function(data) {
+            assert.deepEqual(data, [2, 4, 6], 'incorrect result for parallel mode.')
+            done();
+        })
+    });
+});
+
+/*
 aQ.rest('http://10.10.73.207:8088/api/post/list')
     .then(function(data) {
         //console.log('get rest data');
         //console.log(data);
     })
+    */
