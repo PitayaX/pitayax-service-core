@@ -52,6 +52,29 @@ describe('aQ', function() {
         return fn(6);
     });
 
+    it('bind function', function(done){
+
+        let f = function(flag, count) {
+
+            for(let i = 0; i < count; i++ ) {
+                let line = flag + ': ' + i.toString();
+                //console.log(line);
+            }
+
+            return count;
+        }
+
+
+        let f1 = f.bind(this, 'a', 5);
+        let f2 = f.bind(this, 'b', 20);
+        let f3 = f.bind(this, 'c', 10);
+
+        aQ.binds([f1, f2, f3]).then(function (data) {
+            assert.deepEqual(data, [5, 20, 10], 'incorrect result for parallel mode.');
+            done();
+        });
+    })
+
     it('parallel mode', function(done) {
 
         let q1 = [aQ.Q(2), aQ.Q(4), aQ.Q(6)];
