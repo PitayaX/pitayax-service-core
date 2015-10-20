@@ -3,12 +3,12 @@
 let assert = require('assert');
 let path = require('path');
 let fs = require('fs');
-let aQ = require('../../').aQ;
+let aq = require('../../').aq;
 
-describe('aQ', function() {
+describe('aq', function() {
     it('wrap value', function(done) {
 
-        aQ.Q(1)
+        aq.Q(1)
             .then(function(data) {
                 assert.equal(data, 1, 'test');
                 done();
@@ -22,7 +22,7 @@ describe('aQ', function() {
         let syncData = fs.readFileSync(dataFile, 'utf-8')
 
         //read file from async method
-        aQ.apply(fs.readFile, [dataFile, 'utf-8'])
+        aq.apply(fs.readFile, [dataFile, 'utf-8'])
             .then(function(data) {
                 assert.equal(data, syncData, 'compare file content failed.');
                 done();
@@ -31,7 +31,7 @@ describe('aQ', function() {
 
     it('wrap functions', function() {
 
-        var fn = aQ.wrap(function* (val) {
+        var fn = aq.wrap(function* (val) {
 
             assert.equal(val, 6, 'invaild val');
 
@@ -39,7 +39,7 @@ describe('aQ', function() {
             if (val >= 0) {
                 for(let i = 0; i < val; i++){
 
-                    let ri = yield aQ.Q(i + 1);
+                    let ri = yield aq.Q(i + 1);
                     r.push(ri);
                 }
             }
@@ -69,7 +69,7 @@ describe('aQ', function() {
         let f2 = f.bind(this, 'b', 20);
         let f3 = f.bind(this, 'c', 10);
 
-        aQ.binds([f1, f2, f3]).then(function (data) {
+        aq.binds([f1, f2, f3]).then(function (data) {
             assert.deepEqual(data, [5, 20, 10], 'incorrect result for parallel mode.');
             done();
         });
@@ -77,8 +77,8 @@ describe('aQ', function() {
 
     it('parallel mode', function(done) {
 
-        let q1 = [aQ.Q(2), aQ.Q(4), aQ.Q(6)];
-        aQ.parallel(q1).then(function(data) {
+        let q1 = [aq.Q(2), aq.Q(4), aq.Q(6)];
+        aq.parallel(q1).then(function(data) {
             assert.deepEqual(data, [2, 4, 6], 'incorrect result for parallel mode.')
             done();
         })
@@ -86,7 +86,7 @@ describe('aQ', function() {
 });
 
 /*
-aQ.rest('http://10.10.73.207:8088/api/post/list')
+aq.rest('http://10.10.73.207:8088/api/post/list')
     .then(function(data) {
         //console.log('get rest data');
         //console.log(data);

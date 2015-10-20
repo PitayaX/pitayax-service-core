@@ -3,7 +3,7 @@
     "version":"2.0.0",
     "hash":"",
     "arguments": {
-        "arg1": "abc",
+        "arg1": "string",
         "arg2": {
             "type": "number",
             "default": 1
