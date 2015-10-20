@@ -45,7 +45,7 @@ describe('gq', function() {
                         console.log('err: ' + err.message);
                     }
                     else{
-                        console.log(data);
+                        console.log('r: ' + JSON.stringify(data));
                     }
                 });
                 //if (data.beforeEach) data.beforeEach(data.arguments);

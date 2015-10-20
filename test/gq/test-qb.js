@@ -9,12 +9,13 @@
             "default": 1
         }
     },
-    "beforeEach": function(args){
+    "beforeEach": function(ctx, args){
         return args;
     },
     "parts":[
         {
-            "before": function(args) {
+            "before": function(ctx, args) {
+                ctx['test'] = '123';
                 return args;
             },
             "headers":{
@@ -28,7 +29,9 @@
                     "body":{"$test":"b"}
                 }
             ],
-            "after": function(data) {
+            "after": function(ctx, data) {
+
+                console.log('ctx:' + ctx['test'])
                 return data;
             }
         },
