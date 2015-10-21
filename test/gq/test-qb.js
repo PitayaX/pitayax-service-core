@@ -9,29 +9,35 @@
             "default": 1
         }
     },
-    "beforeEach": function(ctx, args){
-        return args;
+    "beforeEach": function(ctx){
     },
     "parts":[
         {
-            "before": function(ctx, args) {
+            "before": function(ctx) {
                 ctx['test'] = '123';
-                return args;
             },
             "headers":{
-                "type": "query"
+                "type": "query",
+                "key1": "value1",
+                "key2": "value2",
+                "key3": "value3"
             },
             "body": {
-                "$query": {}
+                "$query": {"a": `\"$arg1\"`}
             },
             "parts":[
                 {
-                    "body":{"$test":"b"}
+                    "body":{"$query": {"a": `\"$arg1\"`}}
                 }
             ],
             "after": function(ctx, data) {
+                //get data
+                Object.keys(ctx.headers).forEach(header => {
+                    console.log(header + ': ' + ctx.headers[header]);
+                });
 
-                console.log('ctx:' + ctx['test'])
+                let v1 = ctx['test'];
+                //console.log('ctx:' + ctx['test'])
                 return data;
             }
         },
