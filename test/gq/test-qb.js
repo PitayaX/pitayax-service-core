@@ -14,6 +14,8 @@
     "parts":[
         {
             "before": function(ctx) {
+                let a = 12;
+                let b = `2 ${a} 2`;
                 ctx['test'] = '123';
             },
             "headers":{
@@ -27,13 +29,13 @@
             },
             "parts":[
                 {
-                    "body":{"$query": {"a": `\"$arg1\"`}}
+                    "body":{"$query": {"a": `${args.arg1}`}}
                 }
             ],
             "after": function(ctx, data) {
                 //get data
                 Object.keys(ctx.headers).forEach(header => {
-                    console.log(header + ': ' + ctx.headers[header]);
+                    //console.log(header + ': ' + ctx.headers[header]);
                 });
 
                 let v1 = ctx['test'];
