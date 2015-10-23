@@ -47,7 +47,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/start"
+    "test": "mocha ./test/start",
+    "gstest": "node ./test/fakedHTTP/start.js",
+    "fh": "node ./lib/fake/start.js"
   },
   "bugs": {
     "url": "https://github.com/PitayaX/pitayax-service-core/issues/new",

@@ -4,8 +4,16 @@ let assert = require('assert');
 let path = require('path');
 let fs = require('fs');
 let aq = require('../../').aq;
+let fake = require('../../').fake;
+
+let port = 1338;
+let fakedHTTP = new fake.http(port);
 
 describe('aq', () => {
+    before(() => {
+        fakedHTTP.start();
+    })
+
     it('wrap value', done => {
 
         aq.Q(1)
@@ -88,26 +96,19 @@ describe('aq', () => {
             .catch(err => done(err));
     });
 
-    before(() => {
-        //start http server
-        //console.log('start');
-    });
-
-    it('rest callback', (done) => {
-        done();
+    it('rest method', (done) => {
+        let url = 'http://127.0.0.1:' + port + '/?key1=val1&key2=val2';
+        aq.rest(url)
+            .then(data => {
+                let result = {"key1":"val1", "key2":"val2"};
+                assert.deepEqual(data, result, "Get data from http server error!");
+                done();
+            })
+            .catch(err => done(err));
     })
 
     after(() => {
-        //stop http server
-        //console.log('end');
+        fakedHTTP.stop();
     })
 
 });
-
-/*
-aq.rest('http://10.10.73.207:8088/api/post/list')
-    .then(function(data) {
-        //console.log('get rest data');
-        //console.log(data);
-    })
-    */
