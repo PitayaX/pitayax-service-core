@@ -18,8 +18,6 @@ module.exports = function() {
 
     if (global.babelMode) {
 
-        console.log('babel-mode');
-
         require('babel/register')( {
             //doesn't ignore pitayax modules
             ignore: /node_modules\/[^pitayax]/
