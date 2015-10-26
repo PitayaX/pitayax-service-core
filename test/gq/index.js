@@ -10,24 +10,29 @@ let fake = require('../../').fake;
 let Parser = gq.Parser;
 let Engine = gq.Engine;
 
-let port = 1339;
+let port = 1340;
 let fakedHTTP = new fake.http(port);
 
 let testScript = function(script, args)
 {
-    return new Promise((resolve, reject) => {
+    let execute = script => {
 
-        let scriptFile = path.join(__dirname, script);
-        let parser = new Parser();
+        let engine = new Engine(script);
 
-        aq.call(parser, parser.parseFile, scriptFile)
-            .then(data => {
-                let engine = new Engine(data);
-                return aq.call(engine, engine.execute, (args)?args:[]);
-            })
-            .then(data => resolve(data))
-            .catch(err => reject(err))
-    });
+        //initialize engine
+        engine.Conf.port = port;
+
+        //return
+        return engine.execute((args) ? args : []);
+    }
+
+    let scriptFile = path.join(__dirname, script);
+    let parser = new Parser();
+
+    return (
+        parser.parseFile(scriptFile)
+            .then(script => execute(script))
+        );
 }
 
 describe('gq', function() {
@@ -39,7 +44,8 @@ describe('gq', function() {
 
         //create instance of parser
         let parser = new Parser();
-        aq.call(parser, parser.parseFile, path.join(__dirname, 'test_script1.js'))
+
+        parser.parseFile(path.join(__dirname, 'test_script1.js'))
             .then(data => {
 
                 let args = data.Arguments;
@@ -54,6 +60,48 @@ describe('gq', function() {
                 done();
             })
             .catch(err => {done(err);})
+    })
+
+
+    it('test empty script', function(done) {
+
+        let result = {};
+
+        testScript('test_script_empty.js')
+            .then(data => aq.Q(assert.deepEqual(result, data, 'failed test for script 1')))
+            .then(() => done())
+            .catch(err => done(err));
+    })
+
+    it('test script args - input arguments', function(done) {
+
+        testScript('test_script_args.js', ['static', undefined, 3])
+            .then(data => {
+                let result = {"data1": "static", "data2": "fixed", "data3": 3};
+                assert.deepEqual(result, data, 'failed test for script with arguments step 1');
+
+                return testScript('test_script_args.js', 'val1');
+            })
+            .then(data => {
+                let result = {"data1": "val1", "data2": "fixed", "data3": 0};
+                assert.deepEqual(result, data, 'failed test for script with arguments step 2');
+
+                return testScript('test_script_args.js', ['val1']);
+            })
+            .then(data => {
+                let result = {"data1": "val1", "data2": "fixed", "data3": 0};
+                assert.deepEqual(result, data, 'failed test for script with arguments step 3');
+
+                return testScript('test_script_args.js', {'arg1':'val1', 'arg3': 6});
+            })
+            .then(data => {
+                let result = {"data1": "val1", "data2": "fixed", "data3": 6};
+                assert.deepEqual(result, data, 'failed test for script with arguments step 4');
+
+                return aq.Q(0);
+            })
+            .then(data => done())
+            .catch(err => done(err));
     })
 
     it('test script1 - one part with two args', function(done) {
@@ -102,34 +150,19 @@ describe('gq', function() {
             .catch(err => done(err));
     })
 
-    it('test script args - input arguments', function(done) {
+    it('test rest script', function(done) {
 
-        testScript('test_script_args.js', ['static', undefined, 3])
-            .then(data => {
-                let result = {"data1": "static", "data2": "fixed", "data3": 3};
-                assert.deepEqual(result, data, 'failed test for script with arguments step 1');
+        let result = [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}];
+        let result2 = [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}];
+        let result3 = [{"data1":"val1"}, {"data2":"val2"}, [{"data4":"val4"}, {"data5":"val5"}]];
 
-                return testScript('test_script_args.js', 'val1');
-            })
-            .then(data => {
-                let result = {"data1": "val1", "data2": "fixed", "data3": 0};
-                assert.deepEqual(result, data, 'failed test for script with arguments step 2');
-
-                return testScript('test_script_args.js', ['val1']);
-            })
-            .then(data => {
-                let result = {"data1": "val1", "data2": "fixed", "data3": 0};
-                assert.deepEqual(result, data, 'failed test for script with arguments step 3');
-
-                return testScript('test_script_args.js', {'arg1':'val1', 'arg3': 6});
-            })
-            .then(data => {
-                let result = {"data1": "val1", "data2": "fixed", "data3": 6};
-                assert.deepEqual(result, data, 'failed test for script with arguments step 4');
-
-                return aq.Q(0);
-            })
-            .then(data => done())
+        testScript('test_script_rest.js')
+            .then(data => assert.deepEqual(result, data, 'failed test for rest script'))
+            .then(() => testScript('test_script_rest2.js'))
+            .then(data => assert.deepEqual(result2, data, 'failed test for rest script2'))
+            .then(() => testScript('test_script_rest3.js'))
+            .then(data => assert.deepEqual(result3, data, 'failed test for rest script3'))
+            .then(() => done())
             .catch(err => done(err));
     })
 

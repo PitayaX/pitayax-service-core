@@ -5,19 +5,19 @@
     },
     "parts": [
                 {
-                    "headers": function(ctx) {
+                    "headers": ctx => {
                         return {
                             "h1": ctx.args.arg1,
                             "h2": "h2"
                         }
                     },
 
-                    "beforePost": function(ctx, data) {
+                    "beforePost": (ctx, data) => {
                         let headers = ctx.headers;
                         headers.h2 = 'hh2';
                     },
 
-                    "body": function(ctx, data) {
+                    "body": (ctx, data) => {
                         return {
                             "col1": ctx.headers.h1,
                             "col2": ctx.headers.h2,

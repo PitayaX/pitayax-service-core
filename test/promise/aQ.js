@@ -102,6 +102,14 @@ describe('aq', () => {
             .then(data => {
                 let result = {"key1":"val1", "key2":"val2"};
                 assert.deepEqual(data, result, "Get data from http server error!");
+
+                url = 'http://127.0.0.1:' + port + '/?key1=val1&key3=val3';
+                return aq.rest(url);
+            })
+            .then(data => {
+
+                let result = {"key1":"val1", "key3":"val3"};
+                assert.deepEqual(data, result, "Get data from http server error!");
                 done();
             })
             .catch(err => done(err));
@@ -110,5 +118,4 @@ describe('aq', () => {
     after(() => {
         fakedHTTP.stop();
     })
-
 });
