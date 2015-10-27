@@ -15,24 +15,15 @@ let fakedHTTP = new fake.http(port);
 
 let testScript = function(script, args)
 {
-    let execute = script => {
-
-        let engine = new Engine(script);
-
-        //initialize engine
-        engine.Conf.port = port;
-
-        //return
-        return engine.execute((args) ? args : []);
-    }
 
     let scriptFile = path.join(__dirname, script);
-    let parser = new Parser();
+    let scriptArgs = ((args) ? args : []);
+    let conf = {"Conf": {"port": port}};
 
     return (
-        parser.parseFile(scriptFile)
-            .then(script => execute(script))
-        );
+        Parser.parse(scriptFile)
+            .then(script => Engine.invoke(script, scriptArgs, conf))
+        )
 }
 
 describe('gq', function() {
@@ -40,26 +31,39 @@ describe('gq', function() {
         fakedHTTP.start();
     })
 
-    it('test parser', function(done) {
+    it('test parse', function(done) {
 
-        //create instance of parser
-        let parser = new Parser();
+        Parser.parse(path.join(__dirname, 'test_script1.js'))
+            .then(script => {
 
-        parser.parseFile(path.join(__dirname, 'test_script1.js'))
-            .then(data => {
-
-                let args = data.Arguments;
+                let args = script.Arguments;
                 let argNames = args.map(arg => arg.name);
                 let argTypes = args.map(arg => arg.type);
-                let parts = data.Parts;
+                let parts = script.Parts;
 
+                //parse arguments name
                 assert.deepEqual(argNames, ["arg1", "arg2"], "parse arguments name failed");
+
+                //parse arguments type
                 assert.deepEqual(argTypes, ["string", "number"], "parse arguments type failed");
+
+                //parse parts
                 assert.equal(parts.length, 1, "parse parts failed");
 
+                //end test
                 done();
             })
-            .catch(err => {done(err);})
+            .catch(err => done(err))
+    })
+
+    it('test parse bad file', function(done) {
+
+        Parser.parse(path.join(__dirname, 'test_script_err.js'))
+            .then(script => done(new Error('Can\'t get error parsing bad file.')))
+            .catch(err => {
+                assert.throws(() => {throw err;}, "parse bad script file");
+                done();
+            })
     })
 
 
