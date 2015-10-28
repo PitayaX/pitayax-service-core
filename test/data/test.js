@@ -18,12 +18,19 @@ connections.on = (event, conn) => {
 
 connections.on('open', (conn) => {
     console.log(`connection ${conn.Name} was opened`);
-    if (conn.Name === 'test1') {
 
-        setTimeout(() => {
-            console.log('start to close connection test1');
-            connections.close('test1');
-        }, 2000);
+    switch(conn.Name) {
+        case 'test1':
+            setTimeout(() => {
+                console.log('start to close connection test1');
+                connections.close('test1');
+            }, 2000);
+            break;
+        case 'test3':
+            console.log('ready for query data.');
+            break;
+        default:
+            break;
     }
 })
 
@@ -64,24 +71,27 @@ console.log(`names: ${connections.Names}`);
     .map(filename => JSON.parse(fs.readFileSync(filename)))
     .forEach(schemas => connections.appendSchema(schemas));
 
-for(let key of connections.Schemas.keys()) {
-    console.log(key);
-}
+let keys = [];
+connections.Schemas.forEach((v, k) => keys.push(k));
+console.log(connections.Schemas.size);
 
 let dbAdapter = new data.MongoDBAdapter(connections);
 console.log('created adapter of mongo database');
 
-dbAdapter.retrieve('post', {"title": "title"}, {"method": "findOne"})
-    .then(data => {
-        console.log('find one: ' + JSON.stringify(data, null, 2));
-        return dbAdapter.retrieve('post', {}, {"method": "find"});
-    })
-    .then(data => {
-        console.log('list: ' + JSON.stringify(data, null, 2));
-        return dbAdapter.retrieve('post', {}, {"method": "count"});
-    })
-    .then(data => {
-        console.log('count:' + JSON.stringify(data, null, 2));
-    })
-    .catch(err => console.log(`err: ${err.message}`));
-//let schema = fs.re
+setTimeout(()=> {
+
+    dbAdapter.retrieve('post', {"title": "title"}, {"method": "findOne"})
+        .then(data => {
+            console.log(' --- find one: ' + JSON.stringify(data, null, 2));
+            return dbAdapter.retrieve('post', {}, {"method": "find"});
+        })
+        .then(data => {
+            console.log(' --- list: ' + JSON.stringify(data, null, 2));
+            return dbAdapter.retrieve('post', {}, {"method": "count"});
+        })
+        .then(data => {
+            console.log(' --- count:' + JSON.stringify(data, null, 2));
+        })
+        .then(data => console.log('query data finished'))
+        .catch(err => console.log(`err: ${err.message}`));
+}, 500)
