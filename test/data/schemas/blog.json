@@ -1,0 +1,59 @@
+{
+  "database": {
+      
+    "default": "test1"
+  },
+  "entity": {
+      "post": {
+        "model": {
+          "title": "String",
+          "abstract": "String",
+          "content": "String",
+          "tags": [],
+          "publishedOn": "Date",
+          "publishedBy": "String",
+          "status": "Number",
+          "viewCount": "Number",
+          "CanComment": "Boolean"
+        },
+        "options": {
+          "collection": "post"
+        }
+    },
+    "user": {
+      "model": {
+        "userToken": "String",
+        "nick": "String",
+        "email": "String",
+        "avatarFileToken": "String",
+        "phone": "String",
+        "description": "String",
+        "homepage": "String",
+        "gender": "Number",
+        "birthday": "Date",
+        "createdOn": "Date",
+        "updatedOn": "Date"
+      },
+      "options": {
+        "collection": "user2"
+      }
+    },
+    "team": {
+      "model": {
+          "nick": "String",
+          "email": "String",
+          "avatarFileToken": "String",
+          "phone": "String",
+          "description": "String",
+          "homepage": "String",
+          "users":[{
+              "userToken":"String",
+              "role":"String"
+              }]
+      },
+      "options": {
+        "collection": "team"
+      }
+    }
+  }
+}
