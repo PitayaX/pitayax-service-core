@@ -5,13 +5,13 @@
         ctx.global.output = false;
     },
     "parts": [
-                {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.cfg.port}/?data1=val1`}}},
-                {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.cfg.port}/?data2=val2`}}},
-                //{"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.cfg.port}/?data3=val3`d}}}
+                {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`}}},
+                {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}}},
+                //{"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data3=val3`d}}}
                 {
                     "headers": function(ctx){
                         return {
-                            "url": `http://127.0.0.1:${ctx.cfg.port}/?data3=val3`,
+                            "url": `http://127.0.0.1:${ctx.conf.port}/?data3=val3`,
                             "method": "GET",
                             "headers": {}
                         };
@@ -26,7 +26,7 @@
 
                                 return data;
                             },
-                            "headers": ctx => {return {"url": `http://127.0.0.1:${ctx.cfg.port}/?data4=val4`}},
+                            "headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data4=val4`}},
                             "after": (ctx, data) => {
                                 if (ctx.global.output) console.log('ctx in child after: ' + JSON.stringify(ctx));
                                 return (ctx.global.result3) ? ctx.global.result3 : data;
