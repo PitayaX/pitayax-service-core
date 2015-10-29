@@ -4,6 +4,7 @@ let path = require('path');
 let fs = require('fs');
 let aq = require('../../').aq;
 let gq = require('../../').gq;
+let data = require('../../').data;
 let fake = require('../../').fake;
 
 let Parser = gq.Parser;
@@ -13,20 +14,46 @@ let that = this;
 let port = 1388;
 let fakedHTTP = new fake.http(port);
 
+let script = undefined;
+let args = [];
+
+let connections = new data.MongoDBConnections();
+connections.create('test1', 'mongodb://usrpx:password@10.10.73.207:27077/pitayax-test');
+connections.create('test2', 'mongodb://usrpx:password@10.10.73.207:27077/pitayax-test');
+
+connections.on('error', (err, conn) => {
+    if (err) {
+        console.log(`Get error from ${conn.Name}: ${err.message} (code: ${err.code})`);
+    }
+});
+
 let start = () => fakedHTTP.start();
 let done = (message) => {
 
     if (message) {
         console.log(JSON.stringify(message, null, 2));
+        setTimeout(() => connections.close('test1'), 1000);
     }
 
     fakedHTTP.stop();
 }
 
-let conf = {"Conf": {"port": port}};
-let script = undefined;
-let args = [];
+//append schemas
+['../data/schemas/blog.json', '../data/schemas/northwind.json']
+    .map(file => JSON.parse(fs.readFileSync(path.join(__dirname, file))))
+    .forEach(schema => connections.appendSchema(schema));
 
+let mongoAdapter = new data.MongoDBAdapter(connections);
+
+let createEngine = (script) => {
+
+        let engine = new Engine(script);
+
+        engine.conf = {"port": port};
+        engine.setDataAdapter('mongo', mongoAdapter);
+
+        return engine;
+};
 
 for(let i = 0; i < process.argv.length; i++) {
     if (i == 2) script = process.argv[i];
@@ -40,8 +67,9 @@ if (script) {
         Parser.parse(scriptFile)
             .then(script => {
                 start();
-                return Engine.invoke(script, args, conf);
+                return createEngine(script);
             })
+            .then(engine => engine.execute(args))
             .then(data => done(data))
             .catch(err => done(`exec script failed, details: ${err.message}`))
     }

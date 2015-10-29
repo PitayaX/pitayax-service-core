@@ -60,24 +60,20 @@ connections.on('error', (err, conn) => {
 let conn1 = connections.create('test1', 'mongodb://usrpx:password@10.10.73.207:27077/pitayax-test');
 let conn2 = connections.create('test2', 'mongodb://usrpx:password@10.10.73.207:27077/pitayax-test');
 let conn3 = connections.create('test3', 'mongodb://usrpx:password@10.10.73.207:27077/pitayax-test');
-//let conn4 = connections.create('test4', 'mongodb://usrpx:password22@10.10.73.207:27077/pitayax-test');
+let conn4 = connections.create('test4', 'mongodb://usrpx:password22@10.10.73.207:27077/pitayax-test');
 //let conn5 = connections.create('test5', 'mongodb://usrpx:password@10.10.73.207:27078/pitayax-test');
 
 console.log(`names: ${connections.Names}`);
 
 
 ['/schemas/blog.json', '/schemas/northwind.json']
-    .map(file => path.join(__dirname, file))
-    .map(filename => JSON.parse(fs.readFileSync(filename)))
-    .forEach(schemas => connections.appendSchema(schemas));
-
-let keys = [];
-connections.Schemas.forEach((v, k) => keys.push(k));
+    .map(file => JSON.parse(fs.readFileSync(path.join(__dirname, file))))
+    .forEach(schema => connections.appendSchema(schema));
 
 let dbAdapter = new data.MongoDBAdapter(connections);
 console.log('created adapter of mongo database');
 
-let flags = [false, true, true]
+let flags = [true, true, true]
 
 //test retrieve mode
 if (flags[0]) {
@@ -86,15 +82,15 @@ if (flags[0]) {
 
         dbAdapter.retrieve('post', {"title": "title"}, {"method": "findOne"})
             .then(data => {
-                //console.log(' --- find one: ' + JSON.stringify(data, null, 2));
+                console.log('--- find one: ' + JSON.stringify(data, null, 2));
                 return dbAdapter.retrieve('post', {}, {"method": "find"});
             })
             .then(data => {
-                //console.log(' --- list: ' + JSON.stringify(data, null, 2));
+                console.log('--- list: ' + JSON.stringify(data, null, 2));
                 return dbAdapter.retrieve('post', {}, {"method": "count"});
             })
             .then(data => {
-                console.log('--- count:' + JSON.stringify(data, null, 2));
+                console.log('--- count by query: ' + JSON.stringify(data, null, 2));
             })
             .then(data => console.log('query data finished'))
             .catch(err => console.log(`err: ${err.message}`));
