@@ -16,12 +16,16 @@ global.IIf = function(express, r1, r2) {
 
 if (!String.prototype.startsWith) {
     String.prototype.startsWith
-        = (prefix) => this.indexOf(prefix + '$') === 0
+        = function(prefix){
+            return (this.indexOf(prefix + '$') === 0) ? true : false
+        }
 }
 
 if (!String.prototype.endsWith) {
     String.prototype.endsWith
-        = (suffix) => this.match(suffix + '$') === suffix
+        = function(suffix){
+            return (this.match(suffix + '$') === suffix) ? true : false
+        }
 }
 
 module.exports = function() {
