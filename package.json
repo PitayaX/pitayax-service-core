@@ -2,7 +2,7 @@
   "name": "pitayax-service-core",
   "description": "The core runtime for pitayax-service",
   "homepage": "http://www.pitayax.net",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "Bruce Jiang",
     "email": "bruce2005@pitayax.net"

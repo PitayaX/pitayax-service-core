@@ -14,6 +14,16 @@ global.IIf = function(express, r1, r2) {
     return (express) ? r1 : r2;
 }
 
+if (!String.prototype.startsWith) {
+    String.prototype.startsWith
+        = (prefix) => this.indexOf(prefix + '$') === 0
+}
+
+if (!String.prototype.endsWith) {
+    String.prototype.endsWith
+        = (suffix) => this.match(suffix + '$') === suffix
+}
+
 module.exports = function() {
 
     if (global.babelMode) {

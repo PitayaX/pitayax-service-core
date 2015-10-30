@@ -17,16 +17,14 @@ describe("conf", function() {
 
     it('toJson function', function() {
         //test toJSON function
-let cfJSON = `{
-    "key1": 1,
-    "key2": "test string"
-}`
+        let cfJSON = `{"key1":1,"key2":"test string"}`
         assert.equal(cf.toJSON(), cfJSON, 'toJSON function')
     })
 
     it('clone function', function() {
         //test copy function
         let cf2 = cf.clone()
+        //console.log(cf2)
         assert.deepEqual(cf.toObject(), cf2.toObject(), 'clone function')
     })
 
