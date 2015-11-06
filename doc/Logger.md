@@ -2,9 +2,9 @@
 logger object can use to output log to file, console, memory or database
 
 ``` javascript
-'use strict';
+'use strict'
 
-const logger = require('pitayax-services-core').logger;
+const logger = require('pitayax-services-core').logger
 
 //declare log file name
 const logFile = 'output.log'

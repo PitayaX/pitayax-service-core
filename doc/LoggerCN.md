@@ -2,9 +2,9 @@
 logger对象可以用来输出日志到文件，终端，内存或者数据库等
 
 ``` javascript
-'use strict';
+'use strict'
 
-const logger = require('pitayax-services-core').logger;
+const logger = require('pitayax-services-core').logger
 
 //设置输出日志的文件名
 const logFile = 'output.log'
