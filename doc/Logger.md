@@ -19,7 +19,7 @@ const logger = new Logger(outputter)
 logger.info('message line', 'app name')
 ```
 
-### We can use Logger.createFileOutputter(logFile) to create a default output. Use can custom outputter, the outputer class only implement one method, it is log(line), logger will call it every time when output log, please see following code
+We can use Logger.createFileOutputter(logFile) to create a default output. Use can custom outputter, the outputer class only implement one method, it is log(line), logger will call it every time when output log, please see following code
 
 ``` javascript
 
@@ -42,7 +42,7 @@ logger.info('message line', 'app name')
 
 ```
 
-### logger can output 4 levels entry, you can use below 5 methods to call it. The first parameter is message for log, the second parameter is application name
+logger can output 4 levels entry, you can use below 5 methods to call it. The first parameter is message for log, the second parameter is application name
 
 ``` javascript
 //输出错误信息
@@ -78,7 +78,7 @@ let level = logger.getLogLevel('App1')
 
 ```
 
-### You can modify the logger.lineFormat to change the style of output line, lineFormat to support 4 variants,  $level, $now, $message and $app. You can use it replace log level, timespan, message and application name.
+You can modify the logger.lineFormat to change the style of output line, lineFormat to support 4 variants,  $level, $now, $message and $app. You can use it replace log level, timespan, message and application name.
 
 ``` javascript
 logger.lineFormat = '[$level] $now: $message ($app)'

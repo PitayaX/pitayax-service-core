@@ -19,7 +19,7 @@ const logger = new Logger(outputter)
 logger.info('message line', 'app name')
 ```
 
-### 我们可以用Logger.createFileOutputter(logFile)去创建一个默认的文件输出体。用户也可以自定义文件输出体，文件输出体只需要实现一个方法，即log(line)方法，logger每次输出日志时会调用这个方法，下面的实例演示如何自定义一个输出体。
+我们可以用Logger.createFileOutputter(logFile)去创建一个默认的文件输出体。用户也可以自定义文件输出体，文件输出体只需要实现一个方法，即log(line)方法，logger每次输出日志时会调用这个方法，下面的实例演示如何自定义一个输出体。
 
 ``` javascript
 
@@ -41,7 +41,7 @@ logger.info('message line', 'app name')
 
 ```
 
-### logger可以输出4种级别的日志，分别通过下面5个方法调用。此方法的第一个参数为输出日志的消息内容，第二个参数是输出日志的应用，可忽略
+logger可以输出4种级别的日志，分别通过下面5个方法调用。此方法的第一个参数为输出日志的消息内容，第二个参数是输出日志的应用，可忽略
 
 ``` javascript
 //输出错误信息
@@ -77,7 +77,7 @@ let level = logger.getLogLevel('App1')
 
 ```
 
-### 可以通过修改logger.lineFormat来设置日志输出格式，lineFormat可以支持4个变量, $level, $now, $message和$app。分别对应输出日志的级别，时间，信息和应用名称。
+可以通过修改logger.lineFormat来设置日志输出格式，lineFormat可以支持4个变量, $level, $now, $message和$app。分别对应输出日志的级别，时间，信息和应用名称。
 
 ``` javascript
 logger.lineFormat = '[$level] $now: $message ($app)'
