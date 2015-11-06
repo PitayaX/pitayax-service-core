@@ -45,19 +45,19 @@ logger.info('message line', 'app name')
 logger can output 4 levels entry, you can use below 5 methods to call it. The first parameter is message for log, the second parameter is application name
 
 ``` javascript
-//输出错误信息
+//output error message
 logger.error('message line', 'app name')
 
-//输出警告信息
+//output warning message
 logger.warning('message line', 'app name')
 
-//输出一般信息
+//output info message
 logger.info('message line', 'app name')
 
-//输出详细信息
+//output verbose message
 logger.verbose('message line', 'app name')
 
-//输出调试信息
+//output debug message
 logger.debug('message line', 'app name')
 ```
 
@@ -68,12 +68,12 @@ level = 3 only output error, warning and info message
 level = 4 output all message
 the logger.debug() method only output log when logger.DebugMode = true, also ignore the message called by verbose()
 
-The method logger.setLogLevel(appName, level) can set level for one named application, also can through logger.getLogLevel(appName) to get the level by appliation name
+The method logger.setLogLevel(appName, level) can set level for one named application, also can through logger.getLogLevel(appName) to get the level by application name
 
 ``` javascript
 logger.setLogLevel('App1', 3)
 
-//level等于3
+//level is 3
 let level = logger.getLogLevel('App1')
 
 ```
