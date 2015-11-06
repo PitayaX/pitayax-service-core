@@ -10,6 +10,6 @@ npm install pitayax-services-core
 
 ## Usage
 - [ConfigMap](https://github.com/PitayaX/pitayax-service-core/blob/master/doc/ConfigMap.md)
-- Logger
+- [Logger](https://github.com/PitayaX/pitayax-service-core/blob/master/doc/Logger.md)
 - aq
 - gq

@@ -10,7 +10,7 @@ npm install pitayax-services-core
 
 ## 使用：
 - [ConfigMap](https://github.com/PitayaX/pitayax-service-core/blob/master/doc/ConfigMapCN.md)
-- Logger
+- [Logger](https://github.com/PitayaX/pitayax-service-core/blob/master/doc/LoggerCN.md)
 - aQ
 - Request
 - Rest
