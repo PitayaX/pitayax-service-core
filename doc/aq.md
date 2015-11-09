@@ -48,7 +48,7 @@ const aq = require('pitayax-services-core').aq
 
 aq.rest('http://127.0.0.1:8000?key1=data1&key2=data2')
  .then( data => console.log(data) )   //{"key1":"data1", "key2":"data2"}
-···
+```
 
 aq.rest() method also support to call complex rest services, the post data and result of rest service must use JSON format
 
