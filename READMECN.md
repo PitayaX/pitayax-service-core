@@ -13,3 +13,4 @@ npm install pitayax-services-core
 - [Logger](https://github.com/PitayaX/pitayax-service-core/blob/master/doc/LoggerCN.md)
 - [aq](https://github.com/PitayaX/pitayax-service-core/blob/master/doc/aqCN.md)
 - [gq](https://github.com/PitayaX/pitayax-service-core/blob/master/doc/gqCN.md)
+- data

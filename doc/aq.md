@@ -39,7 +39,7 @@ aq.call(fs, fs.readFile, filename, 'utf-8')
 ```
 
 
-aq.rest() method, call a rest service and get a Promise
+aq.rest() method, call a rest service and get a Promise. Below code show how to get data from rest service with GET mothed.
 
 ``` javascript
 'use strict'
@@ -48,6 +48,11 @@ const aq = require('pitayax-services-core').aq
 
 aq.rest('http://127.0.0.1:8000?key1=data1&key2=data2')
  .then( data => console.log(data) )   //{"key1":"data1", "key2":"data2"}
+···
+
+aq.rest() method also support to call complex rest services, the post data and result of rest service must use JSON format
+
+``` javascript
 
 const headers = {"token": "xcvsd23sfs23423"}
 const body = {"a1":1, "a2":2}

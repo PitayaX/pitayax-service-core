@@ -1,5 +1,5 @@
 ## aq
-aq对象继承自co，具有co的所有功能，并且封装了request对象，可以方便的使用它在服务器端调用远程的rest服务
+aq (async query)对象继承自co，具有co的所有功能，并且封装了request对象，可以方便的使用它在服务器端调用远程的rest服务
 - https://github.com/tj/co
 - https://github.com/request/request
 
@@ -39,7 +39,7 @@ aq.call(fs, fs.readFile, filename, 'utf-8')
 ```
 
 
-aq.rest() 方法，通过调用远程的rest服务返回一个Promise对象
+aq.rest() 方法，通过调用远程的rest服务返回一个Promise对象，下面的代码简单演示了使用get方法获取一个远程服务的数据
 
 ``` javascript
 'use strict'
@@ -48,7 +48,10 @@ const aq = require('pitayax-services-core').aq
 
 aq.rest('http://127.0.0.1:8000?key1=data1&key2=data2')
  .then( data => console.log(data) )   //{"key1":"data1", "key2":"data2"}
+···
 
+aq.rest() 方法也支持复杂的rest调用， rest服务提交和返回的数据必需是json格式的
+``` javascript
 const headers = {"token": "xcvsd23sfs23423"}
 const body = {"a1":1, "a2":2}
 
