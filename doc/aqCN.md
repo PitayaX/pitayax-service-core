@@ -49,6 +49,11 @@ const aq = require('pitayax-services-core').aq
 aq.rest('http://127.0.0.1:8000?key1=data1&key2=data2')
  .then( data => console.log(data) )   //{"key1":"data1", "key2":"data2"}
 
+const headers = {"token": "xcvsd23sfs23423"}
+const body = {"a1":1, "a2":2}
+
+aq.rest('http://127.0.0.1:8000?key1=data1&key2=data2', 'POST', headers, body)
+  .then( data => console.log(data) )   //return result
 ```
 
 aq.parallel() 方法可以同时执行多个Promise对象并将结果返回在一个数组里。
