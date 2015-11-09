@@ -1,5 +1,5 @@
 ## aq
-The aq object inherits from co, it includes all festures in co and wrap request. You can use it easy to call rest service in server side
+The aq object inherits from co, it includes all features in co and wrap request. You can use it easy to call rest service in server side
 - https://github.com/tj/co
 - https://github.com/request/request
 
