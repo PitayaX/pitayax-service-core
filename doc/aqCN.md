@@ -1,8 +1,9 @@
 ## aq
 aq对象继承自co，具有co的所有功能，并且封装了request对象，可以方便的使用它在服务器端调用远程的rest服务
+- https://github.com/tj/co
+- https://github.com/request/request
 
-
-.Q()方法用来封装一个值或错误为Promise对象
+aq.Q()方法用来封装一个值或错误为Promise对象
 ``` javascript
 'use strict'
 
