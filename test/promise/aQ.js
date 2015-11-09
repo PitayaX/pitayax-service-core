@@ -65,7 +65,7 @@ describe('aq', () => {
     it('call method', () => {
         let syncData = fs.readFileSync(testFile, 'utf-8')
 
-        aq.call(fs.readFile, testFile, 'utf-8')
+        aq.call(fs, fs.readFile, testFile, 'utf-8')
             .then( data => {
                 assert.equal(data, syncData, 'read file by call methods failed.')
                 done()
@@ -76,7 +76,7 @@ describe('aq', () => {
     it('apply method', () => {
         let syncData = fs.readFileSync(testFile, 'utf-8')
 
-        aq.apply(fs.readFile, [testFile, 'utf-8'])
+        aq.apply(fs, fs.readFile, [testFile, 'utf-8'])
             .then( data => {
                 assert.equal(data, syncData, 'read file by apply methods failed.')
                 done()
