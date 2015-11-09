@@ -2,7 +2,14 @@
 gq (graph query) 对象提供了一个脚本引擎去合并和处理不同来源的数据。数据可以来源于rest服务或者数据库 (目前仅支持mongo)
 
 
-下面暂时了一个简单的脚本编写，和调用的方法
+#### 编写一个最简单的脚本
+test.js代码如下
+``` javascript
+{
+    "version":"2.0.0",
+    "parts": {"body":"Hello World!"}
+}
+```
 
 使用脚本引擎进行调用，Parser负责解析一个文件称脚本对象，Engine对象负责执行脚本
 ``` javascript
@@ -13,20 +20,44 @@ const gq = require('../../').gq
 const Parser = gq.Parser
 const Engine = gq.Engine
 
-let scriptFile = '/test.js'
+//定义执行脚本的函数
+const testScript = function(script, args)
+{
 
-Parser.parse(scriptFile)
-    .then( script => {
-      const engine = new Engine(script)
+    const scriptFile = path.join(__dirname, script)
+    const scriptArgs = (args) ? args : []
+    const conf = {"conf": {"port": port}}
 
-      engine.setContextItem('conf', {"port": port})
+    return (
+        Parser.parse(scriptFile)
+            .then(script => {
+              const engine = new Engine(script)
 
-      return engine.execute(["test", 2])
-    })
-    .then( data => console.log(data) ) //"test"
+              engine.setContextItem('conf', conf)
+              return engine.execute(scriptArgs)
+            })
+        )
+}
+
+//执行脚本test.js
+testScript('/test.js')
+    .then( data => console.log(data) ) //"Hello World!"
 ```
 
-test.js代码如下
+#### 给脚本添加参数
+一个参数可以使用如下的对象进行描述
+
+``` javascript
+"arg1":{"default": 1, "type":"number"}
+```
+
+通常我们以忽略default的值，简写成这样
+
+``` javascript
+"arg1": "number"
+```
+
+现在我们给脚本定义二参数 arg1和arg2，一个参数是字符串，第二个是数值类型的。下面是test2.js的代码
 ``` javascript
 {
     "version":"2.0.0",
@@ -45,17 +76,18 @@ test.js代码如下
     }
 }
 ```
-整个脚本主要包含2部分节点，参数(arguments)和执行体(parts)。
 
-参数部分可以有一个或多个参数，每个参数注明名称和类型。如果该脚本不需要参数，可以不把Arguments写入脚本。一个完整的参数写法如下，通常我们以忽略default的值。
-``` javascript
-"arg1":{"default": 1, "type":"number"}
-```
+
+#### 默认行为
+
+
+#### 执行体
 执行体可以是执行一个单个的操作也可以定义一个数组执行一系列操作，这些操作的结果会作为一个数组返回。下面的parts定义，从三个
 rest服务中获取数据。其运行结果应该是 [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}]
 
 ``` javascript
 
+"action": "rest"
 "parts": [
             {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`}}},
             {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}}},
@@ -63,4 +95,4 @@ rest服务中获取数据。其运行结果应该是 [{"data1":"val1"}, {"data2"
         ]
 
 ```
-parts节点可以包含一个或多个操作，每个操作
+每个parts节点可以包含headers和body， 如果他们可以是一个对象也可以是个函数，如果是函数可以包含一个context对象。context对象可以
