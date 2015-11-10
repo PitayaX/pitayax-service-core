@@ -57,7 +57,7 @@ testScript('/test.js')
 "arg1": "number"
 ```
 
-现在我们给脚本定义二参数 arg1和arg2，一个参数是字符串，第二个是数值类型的。下面是test2.js的代码
+接下来给脚本定义二参数arg1和arg2，一个参数是字符串，第二个是数值类型的。下面是test2.js的代码
 ``` javascript
 {
     "version":"2.0.0",
@@ -76,7 +76,7 @@ testScript('/test.js')
     }
 }
 ```
-
+定义的参数会保存context里，通过编写函数在查询数据的时候调用。
 
 #### 默认行为
 
