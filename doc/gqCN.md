@@ -26,7 +26,7 @@ const testScript = function(script, args)
 
     const scriptFile = path.join(__dirname, script)
     const scriptArgs = (args) ? args : []
-    const conf = {"conf": {"port": port}}
+    const conf = {"port": port}
 
     return (
         Parser.parse(scriptFile)
@@ -92,11 +92,11 @@ testScript('/test.js')
   - directly 直接返回body里的内容，默认值
   - rest 执行远程rest服务，返回结果
   - mongo 执行mongo数据库的CRUD操作，返回结果
-- headers节点，包含执行行为的各项参数，比如rest服务的URL，HTTP方法等
-- body节点，包含提交的内容主体，相当于rest服务的
-- after节点，可以定义一个函数用于处理返回的结果，如果不需要处理结果可忽略
+- headers节点，返回一个对象包含执行行为的各项参数，比如rest服务的URL，HTTP方法等。
+- body节点，返回一个对象包含提交的内容主体，相当于rest服务的
+- after节点，可以定义一个函数用于处理返回的结果，如不定义则返回原始结果。
 
-headers和body既可以是一个静态的对象，也可以是一个函数
+headers和body既可以是一个静态对象的描述，也可以是一个函数。脚本引擎会根据其类型自动执行。
 
 parts也可以定义成一个数组，此时脚本执行的结果也将返回一个数组，返回的数据可以在脚本级的after函数内再处理
 
@@ -110,4 +110,43 @@ parts也可以定义成一个数组，此时脚本执行的结果也将返回一
         ],
 "after": (ctx, data) => data[0]
 ```
-上面的例子调用了3个rest服务，但是最终只返回第一个rest服务的结果 {"data1":"val1"}。如果我们不在这里定义after方法其运行结果应该是 [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}]
+上面的例子调用了3个rest服务，但是最终只返回第一个rest服务的结果{"data1":"val1"}。如果我们不在这里定义after方法其运行结果应该是 [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}]
+
+#### after函数
+after函数可以处理返回的数据，比如取得的数据来自于不同的数据源，可以同过after函数进行合并，或者对返回的数据进行再处理以期得到想要的数据。下面的代码演示了将一个数组中某个对象数组合并成一个简单的数组
+
+``` javascript
+"after": (ctx, data) => {
+  let keys = []
+
+  data.map( row => row.tags)
+    .forEach( arr => {
+      arr.forEach( key => {
+        if (keys.indexOf(key) === -1) keys.push(key)
+      })
+    })
+
+  return keys
+}
+```
+
+#### context
+context是整个脚本的上下文环境，默认具有args和global两个属性，我们可以通过下面的代码去添加自定义的context属性
+
+``` javascript
+const engine = new Engine(script)
+
+engine.setContextItem('conf', {"k1":"va1", "k2":3})
+engine.setContextItem('req', req)
+```
+context作为参数可以在任一headers, body和after函数中使用，其中的绝大部分变量是全局的，既在整个script范围内是有效的。
+
+``` javascript
+"headers": ctx => {
+    return {
+      "url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`
+    }
+  }
+```
+
+#### parts嵌套
