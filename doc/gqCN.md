@@ -186,47 +186,43 @@ parts节点可以嵌套定义，嵌套定义的parts节点按顺序执行
 {
     "version": "2.0.0",
     "action": "rest",
-    "before": ctx => {
-        ctx.global.output = false;
-    },
     "parts": [
                 {"headers": {"url": "http://127.0.0.1:8000/?data1=val1"}},
                 {"headers": {"url": "http://127.0.0.1:8000/?data2=val2"}},
                 {
-                    "headers": function(ctx){
-                        return {
-                            "url": "http://127.0.0.1:8000/?data3=val3",
-                            "method": "GET",
-                            "headers": {}
-                        };
-                    },
-                    "body": {},
-                    "action": "rest",
-                    "parts":[
-                        {
-                            "before": (ctx, data) => {
-                                ctx.global.result3 = data  //catch data from previous step
-                                return data
-                            },
-                            "headers": {"url": "http://127.0.0.1:8000/?data4=val4"},
-                            "after": (ctx, data) => {
-                                return (ctx.global.result3) ? ctx.global.result3 : data;
-                            }
-                        }
-                    ],
-                    "after": (ctx, data) => {
-                        let r3 = ctx.global.result3
-                        return r3
+                  "action": "rest",
+                  "headers": function(ctx){
+                      return {
+                          "url": "http://127.0.0.1:8000/?data3=val3",
+                          "method": "GET",
+                          "headers": {}
+                      }
+                  },
+                  "body": {},
+
+                  "parts":[
+                    {
+                      "before": (ctx, data) => {
+                          ctx.global.result3 = data  //catch data from previous step
+                          return data
+                      },
+                      "headers": {"url": "http://127.0.0.1:8000/?data4=val4"},
+                      "after": (ctx, data) => {
+                          return (ctx.global.result3) ? ctx.global.result3 : data
+                      }
                     }
+                  ],
+                  "after": (ctx, data) => {
+                      let r3 = ctx.global.result3
+                      return r3
+                  }
                 }
             ],
     "after": (ctx, data) => {
-        if (ctx.global.output) console.log('ctx in global: ' + JSON.stringify(ctx));
-
         let newData = {}
-        if (ctx.global.output) console.log('original: ' + JSON.stringify(data));
+
         data.forEach(item => Object.keys(item).forEach(key => newData[key] = item[key]))
-        if (ctx.global.output) console.log('new: ' + JSON.stringify(newData));
+
         return data;
     }
 }
