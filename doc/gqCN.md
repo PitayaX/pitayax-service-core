@@ -24,19 +24,19 @@ const Engine = gq.Engine
 const testScript = function(script, args)
 {
 
-    const scriptFile = path.join(__dirname, script)
-    const scriptArgs = (args) ? args : []
-    const conf = {"port": port}
+  const scriptFile = path.join(__dirname, script)
+  const scriptArgs = (args) ? args : []
+  const conf = {"port": port}
 
-    return (
-        Parser.parse(scriptFile)
-            .then(script => {
-              const engine = new Engine(script)
+  return (
+    Parser.parse(scriptFile)
+        .then(script => {
+          const engine = new Engine(script)
 
-              engine.setContextItem('conf', conf)
-              return engine.execute(scriptArgs)
-            })
-        )
+          engine.setContextItem('conf', conf)
+          return engine.execute(scriptArgs)
+        })
+  )
 }
 
 //执行脚本test.js
@@ -60,20 +60,20 @@ testScript('/test.js')
 接下来给脚本定义二参数arg1和arg2，一个参数是字符串，第二个是数值类型的。下面是test2.js的代码
 ``` javascript
 {
-    "version":"2.0.0",
-    "arguments": {
-        "arg1": "string",
-        "arg2": "number"
-    },
-    "parts": {
-            "body": function(ctx) {
-                let args = ctx.args;
-                return {
-                    "result": "t",
-                    "data": args.arg1
-                }
-            }
+  "version":"2.0.0",
+  "arguments": {
+    "arg1": "string",
+    "arg2": "number"
+  },
+  "parts": {
+    "body": function(ctx) {
+      let args = ctx.args;
+      return {
+          "result": "t",
+          "data": args.arg1
+      }
     }
+  }
 }
 ```
 定义的参数会保存context里，通过编写函数在查询或处理数据的时候调用，在后面的章节会详细说明context的用法。
@@ -81,8 +81,9 @@ testScript('/test.js')
 #### 执行体
 执行体 (parts) 用来定义一个或者一组操作，每个执行体主要包含action, headers, body和after函数4各部分
 ``` javascript
-"parts"{
-  "action":  "rest",
+"parts":
+{
+  "action": "rest",
   "headers": {"url": "http://127.0.0.1:8000", "method":"POST"},
   "body": {"key1":"val1"},
   "after": (ctx, data) => data
@@ -103,11 +104,12 @@ parts也可以定义成一个数组，此时脚本执行的结果也将返回一
 ``` javascript
 
 "action": "rest",
-"parts": [
-            {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`}}},
-            {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}}},
-            {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data3=val3`}}}
-        ],
+"parts":
+[
+  {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`}}},
+  {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}}},
+  {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data3=val3`}}}
+],
 "after": (ctx, data) => data[0]
 ```
 上面的例子调用了3个rest服务，但是最终只返回第一个rest服务的结果{"data1":"val1"}。如果我们不在这里定义after方法其运行结果应该是 [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}]
@@ -143,10 +145,10 @@ context作为参数可以在任一headers, body和after函数中使用，其中�
 
 ``` javascript
 "headers": ctx => {
-    return {
-      "url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`
-    }
+  return {
+    "url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`
   }
+}
 ```
 
 #### parts嵌套
@@ -155,20 +157,21 @@ parts节点可以嵌套定义，嵌套定义的parts节点按顺序执行
 
 ``` javascript
 {
-    "version": "2.0.0",
-    "action": "rest",
-    "parts": [
-                {"headers": {"url": "http://127.0.0.1:8000/?data1=val1"}},
-                {"headers": {"url": "http://127.0.0.1:8000/?data2=val2"}},
-                {
-                  "headers": {"url": "http://127.0.0.1:8000/?data3=val3"}
-                  "parts":
-                  [
-                    {"headers": {"url": "http://127.0.0.1:8000/?data4=val4"}},
-                    {"headers": {"url": "http://127.0.0.1:8000/?data5=val5"}}
-                  ]
-                },
-            ]
+  "version": "2.0.0",
+  "action": "rest",
+  "parts":
+  [
+    {"headers": {"url": "http://127.0.0.1:8000/?data1=val1"}},
+    {"headers": {"url": "http://127.0.0.1:8000/?data2=val2"}},
+    {
+      "headers": {"url": "http://127.0.0.1:8000/?data3=val3"}
+      "parts":
+      [
+        {"headers": {"url": "http://127.0.0.1:8000/?data4=val4"}},
+        {"headers": {"url": "http://127.0.0.1:8000/?data5=val5"}}
+      ]
+    },
+  ]
 }
 ```
 上面代码运行的最终结果如下：
@@ -184,45 +187,47 @@ parts节点可以嵌套定义，嵌套定义的parts节点按顺序执行
 
 ``` javascript
 {
-    "version": "2.0.0",
-    "action": "rest",
-    "parts": [
-                {"headers": {"url": "http://127.0.0.1:8000/?data1=val1"}},
-                {"headers": {"url": "http://127.0.0.1:8000/?data2=val2"}},
-                {
-                  "action": "rest",
-                  "headers": function(ctx){
-                      return {
-                          "url": "http://127.0.0.1:8000/?data3=val3",
-                          "method": "GET",
-                          "headers": {}
-                      }
-                  },
-                  "body": {},
-                  "parts":[
-                    {
-                      "before": (ctx, data) => {
-                          ctx.global.result3 = data  //catch data from previous step
-                          return data
-                      },
-                      "headers": {"url": "http://127.0.0.1:8000/?data4=val4"},
-                      "after": (ctx, data) => {
-                          return (ctx.global.result3) ? ctx.global.result3 : data
-                      }
-                    }
-                  ],
-                  "after": (ctx, data) => {
-                      let r3 = ctx.global.result3
-                      return r3
-                  }
-                }
-            ],
-    "after": (ctx, data) => {
-        let newData = {}
-
-        data.forEach(item => Object.keys(item).forEach(key => newData[key] = item[key]))
-
-        return data;
+  "version": "2.0.0",
+  "action": "rest",
+  "parts":
+  [
+    {"headers": {"url": "http://127.0.0.1:8000/?data1=val1"}},
+    {"headers": {"url": "http://127.0.0.1:8000/?data2=val2"}},
+    {
+      "action": "rest",
+      "headers": function(ctx) {
+          return {
+              "url": "http://127.0.0.1:8000/?data3=val3",
+              "method": "GET",
+              "headers": {}
+          }
+      },
+      "body": {},
+      "parts":
+      [
+        {
+          "before": (ctx, data) => {
+              ctx.global.result3 = data  //catch data from previous step
+              return data
+          },
+          "headers": {"url": "http://127.0.0.1:8000/?data4=val4"},
+          "after": (ctx, data) => {
+              return (ctx.global.result3) ? ctx.global.result3 : data
+          }
+        }
+      ],
+      "after": (ctx, data) => {
+          let r3 = ctx.global.result3
+          return r3
+      }
     }
+  ],
+  "after": (ctx, data) => {
+      let newData = {}
+
+      data.forEach(item => Object.keys(item).forEach(key => newData[key] = item[key]))
+
+      return data;
+  }
 }
 ```
