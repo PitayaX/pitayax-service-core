@@ -130,8 +130,8 @@ after函数可以处理返回的数据，比如取得的数据来自于不同的
 }
 ```
 
-#### context
-context是整个脚本的上下文环境，默认具有args和global两个属性，我们可以通过下面的代码去添加自定义的context属性
+#### context定义
+context是整个脚本的上下文环境，它包含了当前运行范围内可使用的全部变量。默认具有args和global两个属性，同事可以通过下面的代码去添加自定义的context属性
 
 ``` javascript
 const engine = new Engine(script)
@@ -199,7 +199,6 @@ parts节点可以嵌套定义，嵌套定义的parts节点按顺序执行
                       }
                   },
                   "body": {},
-
                   "parts":[
                     {
                       "before": (ctx, data) => {
