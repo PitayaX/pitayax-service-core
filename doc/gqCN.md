@@ -76,23 +76,38 @@ testScript('/test.js')
     }
 }
 ```
-定义的参数会保存context里，通过编写函数在查询数据的时候调用。
-
-#### 默认行为
-
+定义的参数会保存context里，通过编写函数在查询或处理数据的时候调用，在后面的章节会详细说明context的用法。
 
 #### 执行体
-执行体可以是执行一个单个的操作也可以定义一个数组执行一系列操作，这些操作的结果会作为一个数组返回。下面的parts定义，从三个
-rest服务中获取数据。其运行结果应该是 [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}]
+执行体 (parts) 用来定义一个或者一组操作，每个执行体主要包含action, headers, body和after函数4各部分
+``` javascript
+"parts"{
+  "action":  "rest",
+  "headers": {"url": "http://127.0.0.1:8000", "method":"POST"},
+  "body": {"key1":"val1"},
+  "after": (ctx, data) => data
+}
+```
+- action是行为的名称，目前支持directly, rest和mongo。action亦可以定义在脚本范围，这样如果part部分省略了action的定义，当前的part将使用脚本级的action
+  - directly 直接返回body里的内容，默认值
+  - rest 执行远程rest服务，返回结果
+  - mongo 执行mongo数据库的CRUD操作，返回结果
+- headers节点，包含执行行为的各项参数，比如rest服务的URL，HTTP方法等
+- body节点，包含提交的内容主体，相当于rest服务的
+- after节点，可以定义一个函数用于处理返回的结果，如果不需要处理结果可忽略
+
+headers和body既可以是一个静态的对象，也可以是一个函数
+
+parts也可以定义成一个数组，此时脚本执行的结果也将返回一个数组，返回的数据可以在脚本级的after函数内再处理
 
 ``` javascript
 
-"action": "rest"
+"action": "rest",
 "parts": [
             {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`}}},
             {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}}},
             {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data3=val3`}}}
-        ]
-
+        ],
+"after": (ctx, data) => data[0]
 ```
-每个parts节点可以包含headers和body， 如果他们可以是一个对象也可以是个函数，如果是函数可以包含一个context对象。context对象可以
+上面的例子调用了3个rest服务，但是最终只返回第一个rest服务的结果 {"data1":"val1"}。如果我们不在这里定义after方法其运行结果应该是 [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}]
