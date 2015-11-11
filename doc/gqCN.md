@@ -151,25 +151,58 @@ context作为参数可以在任一headers, body和after函数中使用，其中�
 
 #### parts嵌套
 
+parts节点可以嵌套定义，嵌套定义的parts节点按顺序执行
+
 ``` javascript
 {
     "version": "2.0.0",
     "action": "rest",
     "parts": [
-                {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`}}},
-                {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}}},
                 {
-                    "headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data3=val3`}},
+                  "headers": ctx => {
+                    return {
+                      "url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`
+                    }
+                  }
+                },
+                {
+                  "headers": ctx => {
+                    return {
+                      "url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}
+                    }
+                  },
+                {
+                    "headers": ctx => {
+                      return {
+                        "url": `http://127.0.0.1:${ctx.conf.port}/?data3=val3`
+                      }
+                    },
                     "parts":[
-                        {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data4=val4`}}},
-                        {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data5=val5`}}}
+                        {
+                          "headers": ctx => {
+                            return {"url": `http://127.0.0.1:${ctx.conf.port}/?data4=val4`}
+                          }
+                        },
+                        {
+                          "headers": ctx => {
+                            return {"url": `http://127.0.0.1:${ctx.conf.port}/?data5=val5`}
+                          }
+                        }
                     ],
                 }
             ]
 }
 ```
+上面代码运行的最终结果如下：
+[
+  {"data1":"val1"},
+  {"data2":"val2"},
+  [
+    {"data4":"val4"}, {"data5":"val5"}
+  ]
+]
 
-下面演示了一个复杂脚本的用法
+下面演示了一个复杂脚本的用法，每个子parts可以通过定义before函数来获取父级part执行的结果。通过设置 context.global可以缓存当前的结果进行跨级使用
 
 ``` javascript
 {
@@ -179,8 +212,15 @@ context作为参数可以在任一headers, body和after函数中使用，其中�
         ctx.global.output = false;
     },
     "parts": [
-                {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`}}},
-                {"headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}}},
+                {"headers": ctx => {
+                    return {"url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`}
+                  }
+                },
+                {"headers": ctx => {
+                  return {
+                    "url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}
+                  }
+                },
                 {
                     "headers": function(ctx){
                         return {
@@ -194,20 +234,21 @@ context作为参数可以在任一headers, body和after函数中使用，其中�
                     "parts":[
                         {
                             "before": (ctx, data) => {
-                                if (ctx.global.output) console.log('ctx in child before: ' + JSON.stringify(ctx));
                                 ctx.global.result3 = data;  //catch data from previous step
 
                                 return data;
                             },
-                            "headers": ctx => {return {"url": `http://127.0.0.1:${ctx.conf.port}/?data4=val4`}},
+                            "headers": ctx => {
+                              return {
+                                "url": `http://127.0.0.1:${ctx.conf.port}/?data4=val4`
+                              }
+                            },
                             "after": (ctx, data) => {
-                                if (ctx.global.output) console.log('ctx in child after: ' + JSON.stringify(ctx));
                                 return (ctx.global.result3) ? ctx.global.result3 : data;
                             }
                         }
                     ],
                     "after": (ctx, data) => {
-                        if (ctx.global.output) console.log('ctx in part: ' + JSON.stringify(ctx));
                         ctx.global.test = 'temp';
 
                         return data;
