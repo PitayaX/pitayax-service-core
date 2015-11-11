@@ -158,38 +158,16 @@ parts节点可以嵌套定义，嵌套定义的parts节点按顺序执行
     "version": "2.0.0",
     "action": "rest",
     "parts": [
+                {"headers": {"url": "http://127.0.0.1:8000/?data1=val1"}},
+                {"headers": {"url": "http://127.0.0.1:8000/?data2=val2"}},
                 {
-                  "headers": ctx => {
-                    return {
-                      "url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`
-                    }
-                  }
+                  "headers": {"url": "http://127.0.0.1:8000/?data3=val3"}
+                  "parts":
+                  [
+                    {"headers": {"url": "http://127.0.0.1:8000/?data4=val4"}},
+                    {"headers": {"url": "http://127.0.0.1:8000/?data5=val5"}}
+                  ]
                 },
-                {
-                  "headers": ctx => {
-                    return {
-                      "url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}
-                    }
-                  },
-                {
-                    "headers": ctx => {
-                      return {
-                        "url": `http://127.0.0.1:${ctx.conf.port}/?data3=val3`
-                      }
-                    },
-                    "parts":[
-                        {
-                          "headers": ctx => {
-                            return {"url": `http://127.0.0.1:${ctx.conf.port}/?data4=val4`}
-                          }
-                        },
-                        {
-                          "headers": ctx => {
-                            return {"url": `http://127.0.0.1:${ctx.conf.port}/?data5=val5`}
-                          }
-                        }
-                    ],
-                }
             ]
 }
 ```
@@ -212,19 +190,12 @@ parts节点可以嵌套定义，嵌套定义的parts节点按顺序执行
         ctx.global.output = false;
     },
     "parts": [
-                {"headers": ctx => {
-                    return {"url": `http://127.0.0.1:${ctx.conf.port}/?data1=val1`}
-                  }
-                },
-                {"headers": ctx => {
-                  return {
-                    "url": `http://127.0.0.1:${ctx.conf.port}/?data2=val2`}
-                  }
-                },
+                {"headers": {"url": "http://127.0.0.1:8000/?data1=val1"}},
+                {"headers": {"url": "http://127.0.0.1:8000/?data2=val2"}},
                 {
                     "headers": function(ctx){
                         return {
-                            "url": `http://127.0.0.1:${ctx.conf.port}/?data3=val3`,
+                            "url": "http://127.0.0.1:8000/?data3=val3",
                             "method": "GET",
                             "headers": {}
                         };
@@ -234,24 +205,18 @@ parts节点可以嵌套定义，嵌套定义的parts节点按顺序执行
                     "parts":[
                         {
                             "before": (ctx, data) => {
-                                ctx.global.result3 = data;  //catch data from previous step
-
-                                return data;
+                                ctx.global.result3 = data  //catch data from previous step
+                                return data
                             },
-                            "headers": ctx => {
-                              return {
-                                "url": `http://127.0.0.1:${ctx.conf.port}/?data4=val4`
-                              }
-                            },
+                            "headers": {"url": "http://127.0.0.1:8000/?data4=val4"},
                             "after": (ctx, data) => {
                                 return (ctx.global.result3) ? ctx.global.result3 : data;
                             }
                         }
                     ],
                     "after": (ctx, data) => {
-                        ctx.global.test = 'temp';
-
-                        return data;
+                        let r3 = ctx.global.result3
+                        return r3
                     }
                 }
             ],
