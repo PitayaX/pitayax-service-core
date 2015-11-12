@@ -15,7 +15,7 @@ test.js代码如下
 ``` javascript
 'use strict'
 
-const gq = require('../../').gq
+const gq = require('pitayax-service-core').gq
 
 const Parser = gq.Parser
 const Engine = gq.Engine

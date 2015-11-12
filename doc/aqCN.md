@@ -7,7 +7,7 @@ aq.Q()方法用来封装一个值或错误为Promise对象
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 aq.Q(1)
  .then( data => console.log(data) ) //1
@@ -44,7 +44,7 @@ aq.rest() 方法，通过调用远程的rest服务返回一个Promise对象，�
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 aq.rest('http://127.0.0.1:8000?key1=data1&key2=data2')
  .then( data => console.log(data) )   //{"key1":"data1", "key2":"data2"}
@@ -65,7 +65,7 @@ aq.parallel() 方法可以同时执行多个Promise对象并将结果返回在�
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 aq.parallel([aq.Q(1), aq.Q(2), aq.Q(3)])
  .then( data => console.log(data) )   //[1, 2, 3]
@@ -77,7 +77,7 @@ aq.parallel([aq.Q(1), aq.Q(2), aq.Q(3)])
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 aq.parallel([
   aq.rest('http://127.0.0.1:8000?key1=data1&key2=data2'),
@@ -93,7 +93,7 @@ aq.series() 方法可以依次执行多个Promise对象并返回最后一个Prom
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 aq.series([aq.Q(1), aq.Q(2), aq.Q(3)])
  .then( data => console.log(data) )   //3
@@ -104,7 +104,7 @@ aq.readFile() 方法可以异步读取一个文件并返回一个Promise对象�
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 let filename = 'data.txt'
 

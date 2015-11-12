@@ -4,7 +4,7 @@ The class ConfigMap can parse JSON or YAML format configuration file to a Map in
 ``` javascript
 'use strict';
 
-let ConfigMap = require('pitayax-services-core').ConfigMap;
+let ConfigMap = require('pitayax-service-core').ConfigMap;
 
 //get full file path and parse it for YAML format
 let configFile = path.join(__dirname, 'config.yml');

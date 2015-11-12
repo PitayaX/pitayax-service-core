@@ -4,7 +4,7 @@ ConfigMap类可以用于解析JSON或者YAML格式的配置文件成一个Map对
 ``` javascript
 'use strict';
 
-let ConfigMap = require('pitayax-services-core').ConfigMap;
+let ConfigMap = require('pitayax-service-core').ConfigMap;
 
 //get full file path and parse it for YAML format
 let configFile = path.join(__dirname, 'config.yml');

@@ -7,7 +7,7 @@ aq.Q() method, package a value or error to a Promise
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 aq.Q(1)
  .then( data => console.log(data) ) //1
@@ -44,7 +44,7 @@ aq.rest() method, call a rest service and get a Promise. Below code show how to 
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 aq.rest('http://127.0.0.1:8000?key1=data1&key2=data2')
  .then( data => console.log(data) )   //{"key1":"data1", "key2":"data2"}
@@ -66,7 +66,7 @@ aq.parallel() method, can execute many Promise at the same time and get an array
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 aq.parallel([aq.Q(1), aq.Q(2), aq.Q(3)])
  .then( data => console.log(data) )   //[1, 2, 3]
@@ -78,7 +78,7 @@ We can complex aq.rest and aq.parallel to batch process a few rest service.
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 aq.parallel([
   aq.rest('http://127.0.0.1:8000?key1=data1&key2=data2'),
@@ -94,7 +94,7 @@ aq.series() method, execute a few Promise one by one and get the result for the 
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 aq.series([aq.Q(1), aq.Q(2), aq.Q(3)])
  .then( data => console.log(data) )   //3
@@ -105,7 +105,7 @@ aq.readFile() method, read a file and return a Promise
 ``` javascript
 'use strict'
 
-const aq = require('pitayax-services-core').aq
+const aq = require('pitayax-service-core').aq
 
 let filename = 'data.txt'
 
