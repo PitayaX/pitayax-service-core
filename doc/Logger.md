@@ -4,7 +4,7 @@ logger object can use to output log to file, console, memory or database
 ``` javascript
 'use strict'
 
-const logger = require('pitayax-service-core').logger
+const Logger = require('pitayax-service-core').Logger
 
 //declare log file name
 const logFile = 'output.log'

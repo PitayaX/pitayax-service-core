@@ -2,6 +2,10 @@
 
 const aq = require('../../').aq
 
+aq.post('http://127.0.0.1:8088/api/post2/query')
+.then(data => {console.log(data)})
+.catch( err => {console.log(`err: ${JSON.stringify(err)}`)})
+
 aq.rest(
   'http://120.24.58.42:2001/token',
   'POST',
@@ -11,13 +15,10 @@ aq.rest(
     "grant_type": "refresh_token"
   })
   .then( data => {
-    console.log('got')
-    console.log(data)
+    console.log(`data: ${JSON.stringify(data)}`)
   })
   .catch( err => {
-    console.log('err')
-    console.log(err)
-    console.log('end')
+    console.log(`err: ${err}`)
   })
 
 /*
