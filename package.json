@@ -2,7 +2,7 @@
   "name": "pitayax-service-core",
   "description": "The core runtime for pitayax-service",
   "homepage": "http://www.pitayax.net",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "author": {
     "name": "Bruce Jiang",
     "email": "bruce2005@pitayax.net"
@@ -48,11 +48,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/start",
-    "gstest": "node ./test/fakedHTTP/start.js",
-    "gqtest": "node ./test/gq/test.js",
-    "datatest": "node ./test/data/test.js",
-    "fh": "node ./lib/fake/start.js"
+    "test": "mocha ./test/start"
   },
   "bugs": {
     "url": "https://github.com/PitayaX/pitayax-service-core/issues/new",
