@@ -20,6 +20,7 @@ aq.rest(
   .catch( err => {
     console.log(`err: ${err}`)
   })
+  .finally(() => {console.log('fin')})
 
 /*
 aq.rest('http://10.10.73.207:8088/api/post/5639991d528373183cb64039', 'GET', {})
