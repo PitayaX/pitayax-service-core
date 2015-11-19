@@ -154,9 +154,10 @@ describe('gq', function() {
 
     it('test rest script', function(done) {
 
-        let result = [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}]
-        let result2 = [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}]
-        let result3 = [{"data1":"val1"}, {"data2":"val2"}, [{"data4":"val4"}, {"data5":"val5"}]]
+        const result = [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}]
+        const result2 = [{"data1":"val1"}, {"data2":"val2"}, {"data3":"val3"}]
+        const result3 = [{"data1":"val1"}, {"data2":"val2"}, [{"data4":"val4"}, {"data5":"val5"}]]
+        const result4 = [{"data1":"val1"}, {"data2":"val2"}, {"data4":"val4"}]
 
         testScript('test_script_rest.js')
             .then( data => assert.deepEqual(result, data, 'failed test for rest script') )
@@ -164,6 +165,8 @@ describe('gq', function() {
             .then( data => assert.deepEqual(result2, data, 'failed test for rest script2') )
             .then( () => testScript('test_script_rest3.js') )
             .then( data => assert.deepEqual(result3, data, 'failed test for rest script3') )
+            .then( () => testScript('test_script_rest4.js') )
+            .then( data => assert.deepEqual(result4, data, 'failed test for rest script3') )
             .then( () => done() )
             .catch( err => done(err) )
     })

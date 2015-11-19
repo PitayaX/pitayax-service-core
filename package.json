@@ -2,7 +2,7 @@
   "name": "pitayax-service-core",
   "description": "The core runtime for pitayax-service",
   "homepage": "http://www.pitayax.net",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "author": {
     "name": "Bruce Jiang",
     "email": "bruce2005@pitayax.net"
@@ -10,7 +10,10 @@
   "keywords": [
     "pitayax",
     "service",
-    "runtime"
+    "runtime",
+    "async query",
+    "graph query",
+    "data engine"
   ],
   "repository": {
     "type": "git",
@@ -25,8 +28,8 @@
     "babel-runtime": "^5.8.20",
     "co": "^4.6.0",
     "js-yaml": "^3.4.2",
-    "mongoose": "^4.*",
-    "request": "^2.*"
+    "mongoose": "^4.2.6",
+    "request": "^2.66.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.0",
