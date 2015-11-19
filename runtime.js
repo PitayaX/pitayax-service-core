@@ -1,22 +1,26 @@
-'use strict';
+'use strict'
 
-if (process.argv.indexOf('--babel') >= 0){
-    global.babelMode = true;
+if (process.argv.indexOf('--babel') >= 0)
+{
+    global.babelMode = true
 }
-else {
-    var version = (process.versions.node) ? process.versions.node.split('.'):[0, 0, 0];
-    global.babelMode = (parseInt(version[0]) >= 4) ? false : true;
-}
-
-global.harmonyMode = (process.execArgv.indexOf('--harmony') >= 0) ? true :false
-
-global.IIf = function(express, r1, r2) {
-    return (express) ? r1 : r2;
+else
+{
+    var version = (process.versions.node) ? process.versions.node.split('.') : [0, 0, 0]
+    global.babelMode = (parseInt(version[0]) >= 4) ? false : true
 }
 
-if (!String.prototype.startsWith) {
+global.harmonyMode = (process.execArgv.indexOf('--harmony') >= 0) ? true : false
+
+global.IIf = function(express, r1, r2)
+{
+    return (express) ? r1 : r2
+}
+
+if (!String.prototype.startsWith)
+{
     String.prototype.startsWith
-        = function(prefix){
+        = function(prefix) {
             return (this.indexOf(prefix + '$') === 0) ? true : false
         }
 }
@@ -28,37 +32,38 @@ if (!String.prototype.endsWith) {
         }
 }
 
-if (!Promise.prototype.finally) {
+if (!Promise.prototype.finally)
+{
   Promise.prototype.finally = function(callback) {
 
-    var constructor = this.constructor;
+    var constructor = this.constructor
 
-    		return this.then(function(value) {
-    				return constructor.resolve(callback()).then(function() {
-    					return value
-    				})
-    			}, function(reason) {
-    				return constructor.resolve(callback()).then(function() {
-    					throw reason;
-    				})
-    			})
+  		return this.then( function(value) {
+  				return constructor.resolve(callback()).then(function() {
+  					return value
+  				})
+  			}, function(reason) {
+  				return constructor.resolve(callback()).then(function() {
+  					throw reason
+  				})
+  			})
   }
 }
 
 module.exports = function() {
 
-    if (global.babelMode) {
+  if (global.babelMode) {
 
-        require('babel/register')( {
-            //doesn't ignore pitayax modules
-            ignore: /node_modules\/[^pitayax]/
-        });
+    require('babel/register')( {
+      //doesn't ignore pitayax modules
+      ignore: /node_modules\/[^pitayax]/
+    })
 
-        //import es6 from 'babel-runtime/core-js';
-        var es6 = require('babel-runtime/core-js').default;
+    //import es6 from 'babel-runtime/core-js'
+    var es6 = require('babel-runtime/core-js').default
 
-        //export default es6;
-        global.Map = es6.Map;
-        module.exports = es6;
-    }
+    //export default es6;
+    global.Map = es6.Map
+    module.exports = es6
+  }
 }

@@ -1,5 +1,5 @@
-'use strict';
+'use strict'
 
-require('./runtime.js')();
+require('./runtime.js')()
 
-module.exports = require('./lib');
+module.exports = require('./lib')
