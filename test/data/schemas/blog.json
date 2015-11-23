@@ -1,28 +1,32 @@
 {
-  "database": {
-      
+  "database":
+  {
     "default": "test1"
   },
-  "entity": {
-      "post": {
-        "model": {
-          "title": "String",
-          "abstract": "String",
-          "content": "String",
-          "tags": [],
-          "publishedOn": "Date",
-          "publishedBy": "String",
-          "status": "Number",
-          "viewCount": "Number",
-          "CanComment": "Boolean"
-        },
-        "options": {
-          "collection": "post"
-        }
+  "entity":
+  {
+    "post":
+    {
+      "model":
+      {
+        "title": "String",
+        "abstract": "String",
+        "content": "String",
+        "tags": [],
+        "publishedOn": { "type": "Date", "default": "${Date.now()}" },
+        "publishedBy": "String",
+        "status": "Number",
+        "viewCount": "Number",
+        "likeCount": "Number",
+        "CanComment": "Boolean"
+      },
+      "options": { "collection": "post" }
     },
-    "user": {
-      "model": {
-        "userToken": "String",
+    "user":
+    {
+      "model":
+      {
+        "userToken": { "type": "String" },
         "nick": "String",
         "email": "String",
         "avatarFileToken": "String",
@@ -34,26 +38,21 @@
         "createdOn": "Date",
         "updatedOn": "Date"
       },
-      "options": {
-        "collection": "user2"
-      }
+      "options": { "collection": "user" }
     },
-    "team": {
-      "model": {
-          "nick": "String",
-          "email": "String",
-          "avatarFileToken": "String",
-          "phone": "String",
-          "description": "String",
-          "homepage": "String",
-          "users":[{
-              "userToken":"String",
-              "role":"String"
-              }]
+    "team":
+    {
+      "model":
+      {
+        "nick": "String",
+        "email": "String",
+        "avatarFileToken": "String",
+        "phone": "String",
+        "description": "String",
+        "homepage": "String",
+        "users": [{ "userToken": "String", "role": "String" }]
       },
-      "options": {
-        "collection": "team"
-      }
+      "options": { "collection": "team" }
     }
   }
 }

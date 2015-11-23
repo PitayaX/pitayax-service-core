@@ -1,14 +1,14 @@
 'use strict'
 
-let path = require('path')
-let fs = require('fs')
-let aq = require('../../').aq
-let gq = require('../../').gq
-let data = require('../../').data
-let fake = require('../../').fake
+const path = require('path')
+const fs = require('fs')
+const aq = require('../../').aq
+const gq = require('../../').gq
+const data = require('../../').data
+const fake = require('../../').fake
 
-let Parser = gq.Parser
-let Engine = gq.Engine
+const Parser = gq.Parser
+const Engine = gq.Engine
 
 let that = this
 let port = 1388
@@ -66,6 +66,7 @@ if (script) {
     if (fs.existsSync(scriptFile)){
         Parser.parse(scriptFile)
             .then(script => {
+                //console.log(script)
                 start()
                 return createEngine(script)
             })

@@ -35,8 +35,8 @@ describe('gq', function() {
             .then( script => {
 
                 let args = script.Arguments
-                let argNames = args.map(arg => arg.name)
-                let argTypes = args.map(arg => arg.type)
+                let argNames = args.map(arg => arg.Name)
+                let argTypes = args.map(arg => arg.Type)
                 let parts = script.Parts
 
                 //parse arguments name
@@ -46,7 +46,7 @@ describe('gq', function() {
                 assert.deepEqual(argTypes, ["string", "number"], "parse arguments type failed")
 
                 //parse parts
-                assert.equal(parts.length, 1, "parse parts failed")
+                assert.equal(parts.size, 1, "parse parts failed")
 
                 //end test
                 done()
