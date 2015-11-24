@@ -7,7 +7,7 @@
     "headers": { "target": "post" },
     "body":
     {
-      "query": {"tags": { "$in": ["key1", "312"] }},
+      "query": {"tags": { "$in": ["312"] } },
       "fields": ["_id", "publishedOn", "publishedBy"]
     },
     "relations": {

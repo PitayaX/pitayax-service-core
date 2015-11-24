@@ -10,32 +10,33 @@ const fake = require('../../').fake
 const Parser = gq.Parser
 const Engine = gq.Engine
 
-let that = this
-let port = 1388
-let fakedHTTP = new fake.http(port)
+const that = this
+const port = 1388
+const fakedHTTP = new fake.http(port)
 
 let script = undefined
 let args = []
 
-let connections = new data.MongoDBConnections()
+const connections = new data.MongoDBConnections()
 connections.create('test1', 'mongodb://usrpx:password@10.10.73.207:27077/pitayax-test')
 connections.create('test2', 'mongodb://usrpx:password@10.10.73.207:27077/pitayax-test')
 
 connections.on('error', (err, conn) => {
-    if (err) {
-        console.log(`Get error from ${conn.Name}: ${err.message} (code: ${err.code})`)
-    }
+  if (err) {
+    console.log(`Get error from ${conn.Name}: ${err.message} (code: ${err.code})`)
+  }
 })
 
-let start = () => fakedHTTP.start()
-let done = (message) => {
+const start = () => fakedHTTP.start()
+const done = (message) => {
 
-    if (message) {
-        console.log(JSON.stringify(message, null, 2))
-        setTimeout(() => connections.close('test1'), 1000)
-    }
+  if (message) {
+    //console.log(message.toObject())
+    console.log(JSON.stringify(message, null, 2))
+    setTimeout(() => connections.close('test1'), 1000)
+  }
 
-    fakedHTTP.stop()
+  fakedHTTP.stop()
 }
 
 //append schemas
