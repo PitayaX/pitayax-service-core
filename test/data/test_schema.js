@@ -8,6 +8,8 @@ const data = require('../../').data
 
 const cache = data.SchemaCache.create()
 
+console.log(cache)
+
 let file = undefined
 
 file = path.join(__dirname, '../data/schemas/blog.json')
