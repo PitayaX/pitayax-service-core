@@ -1,9 +1,9 @@
 'use strict'
 
-let fs = require('fs')
-let path = require('path')
-let aq = require('../../').aq
-let data = require('../../').data
+const fs = require('fs')
+const path = require('path')
+const aq = require('../../').aq
+const data = require('../../').data
 
 
 let connections = new data.MongoDBConnections()
