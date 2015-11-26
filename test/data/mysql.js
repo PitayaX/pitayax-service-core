@@ -2,23 +2,26 @@
 
 const Data = require('../../').data
 
-const conns = new Data.MySQLDBConnections()
+const mysqlConns = new Data.MySQLDBConnections()
 const connectionString = 'mysql://elliemae_ps:elliemae-sh-13@10.10.73.209/db-ps?pool=true'
-const cs = conns.parseConnectionString(connectionString, {"typeCast": true, "stringifyObjects": false})
+const cs = mysqlConns.parseConnectionString(connectionString, {"typeCast": true, "stringifyObjects": false})
 //console.log(cs)
 
-conns.create('test1', connectionString, {})
+mysqlConns.create('test1', connectionString, {})
 
-const conn = conns.get('test1')
-conn.execute('SELECT col1 FROM table1')
-  .then( data => console.log(conn.repackageData(data)) )
+const mysqlConn = mysqlConns.get('test1')
+
+mysqlConn.createConnection()
+  .then(conn => mysqlConn.query(conn, 'SELECT col1 FROM table1'))
+  .then( data => console.log('a:' + JSON.stringify(mysqlConn.repackageData(data))))
+  .finally(() => mysqlConn.end())
+
+
+mysqlConn.execute('SELECT col1 FROM table1')
+  .then( data => console.log('b:' + JSON.stringify(mysqlConn.repackageData(data))))
   .catch( err => { console.log(err) })
 
-conn.execute('select max(col1) + 1 as a from table1')
- .then( data => {
-   //return conn.execute('insert into table1 (`col1`, `col2`, `col3`) values (' + data[0].a + ', "t1", "t2");')
-   return data
- })
+mysqlConn.execute('select max(col1) + 1 as a from table1')
  .then( data => console.log(data) )
  .catch( err => console.log(err) )
- .finally( () => conn.close() )
+ .finally( () => mysqlConn.end() )
